@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Revisão das ilustrações</title>
+<style>
+  body { font: 14px system-ui, sans-serif; margin: 16px; background: #fff; color: #222; }
+  .bar { position: sticky; top: 0; background: #fff; padding: 8px 0; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 12px; }
+  figure { margin: 0; background: #eef1f8; border-radius: 12px; padding: 8px; }
+  figure div svg { width: 100%; height: auto; display: block; }
+  figcaption { font-weight: 700; padding: 4px; }
+  input[type=range] { width: 320px; }
+</style>
+</head>
+<body>
+<!-- Review page for scripts/desenhar_sinais.py output. Not linked from the app.
+     ?t=0.55 freezes every drawing at that second; without it they play. -->
+<div class="bar">
+  <label>Tempo <input id="t" type="range" min="0" max="2.6" step="0.05" value="0"></label>
+  <output id="tv">tocando</output>
+  <button id="play" type="button">Tocar</button>
+</div>
+<div class="grid" id="grid"></div>
+<script type="module">
+  const ids = ['agua', 'cafe', 'familia', 'obrigado', 'voce'];
+  const grid = document.getElementById('grid');
+  const svgs = [];
+  for (const id of ids) {
+    const text = await fetch(`../media/sinais/${id}.svg`, { cache: 'no-cache' }).then(r => r.text());
+    const fig = document.createElement('figure');
+    fig.innerHTML = `<figcaption>${id}</figcaption><div>${text}</div>`;
+    grid.append(fig);
+    svgs.push(fig.querySelector('svg'));
+  }
+  const t = document.getElementById('t');
+  const tv = document.getElementById('tv');
+  const freeze = sec => {
+    for (const svg of svgs) { svg.pauseAnimations(); svg.setCurrentTime(sec); }
+    tv.textContent = `${sec.toFixed(2)} s`;
+  };
+  t.addEventListener('input', () => freeze(Number(t.value)));
+  document.getElementById('play').addEventListener('click', () => {
+    for (const svg of svgs) { svg.setCurrentTime(0); svg.unpauseAnimations(); }
+    tv.textContent = 'tocando';
+  });
+  const q = new URLSearchParams(location.search).get('t');
+  if (q !== null) { t.value = q; freeze(Number(q)); }
+  window.freeze = freeze;
+</script>
+</body>
+</html>

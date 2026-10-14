@@ -1,0 +1,130 @@
+{
+  "title": "Demo",
+  "categories": [
+    {
+      "id": "cumprimentos",
+      "name": "Cumprimentos",
+      "icon": "chat",
+      "color": "cumprimentos"
+    },
+    {
+      "id": "pessoas",
+      "name": "Pessoas",
+      "icon": "person",
+      "color": "pessoas"
+    },
+    {
+      "id": "familia",
+      "name": "Família",
+      "icon": "people",
+      "color": "familia"
+    },
+    {
+      "id": "comida",
+      "name": "Comida e bebida",
+      "icon": "cup",
+      "color": "comida"
+    }
+  ],
+  "reference": {
+    "name": "Dicionário da Língua Brasileira de Sinais (INES)",
+    "url": "https://dicionario.ines.gov.br/"
+  },
+  "signs": [
+    {
+      "id": "agua",
+      "word": "água",
+      "aliases": [
+        "agua"
+      ],
+      "category": "comida",
+      "image": "media/sinais/agua.svg",
+      "poster": "media/sinais/agua-parado.svg",
+      "how": "Mão em L, palma para a frente, com a ponta do polegar no queixo. O indicador dobra e estica repetidamente.",
+      "params": {
+        "handshape": "L: polegar e indicador estendidos, demais dedos fechados",
+        "location": "Queixo (o polegar toca)",
+        "movement": "Indicador dobra e estica, 2 a 3 vezes",
+        "orientation": "Palma para a frente, levemente voltada para o rosto",
+        "expression": "Neutra"
+      }
+    },
+    {
+      "id": "cafe",
+      "word": "café",
+      "aliases": [
+        "cafe"
+      ],
+      "category": "comida",
+      "image": "media/sinais/cafe.svg",
+      "poster": "media/sinais/cafe-parado.svg",
+      "how": "Polegar e indicador unidos em círculo, os outros três dedos abertos. O círculo fica no canto da boca e o punho gira para dentro e volta, duas ou três vezes.",
+      "params": {
+        "handshape": "Polegar e indicador em círculo; médio, anelar e mínimo estendidos",
+        "location": "Canto da boca, do lado da mão que sinaliza",
+        "movement": "Giro do punho, repetido, sem tirar o círculo da boca",
+        "orientation": "Palma para a frente; no giro, o dorso fica para a frente e os dedos cruzam diante da boca",
+        "expression": "Neutra"
+      }
+    },
+    {
+      "id": "familia",
+      "word": "família",
+      "aliases": [
+        "familia"
+      ],
+      "category": "familia",
+      "image": "media/sinais/familia.svg",
+      "poster": "media/sinais/familia-parado.svg",
+      "how": "As duas mãos em F, lado a lado diante do peito, palmas para a frente. Elas se afastam num semicírculo horizontal para a frente e se tocam pelos dedos mínimos, com as palmas para o corpo.",
+      "params": {
+        "handshape": "F nas duas mãos: indicador dobrado tocando o polegar; médio, anelar e mínimo estendidos",
+        "location": "Espaço neutro, diante da parte alta do peito",
+        "movement": "Semicírculo horizontal, para os lados e para a frente, uma vez",
+        "orientation": "Palmas para a frente no início, para o corpo no fim",
+        "expression": "Neutra"
+      }
+    },
+    {
+      "id": "obrigado",
+      "word": "obrigado",
+      "aliases": [
+        "obrigada",
+        "brigado",
+        "brigada",
+        "obg"
+      ],
+      "category": "cumprimentos",
+      "image": "media/sinais/obrigado.svg",
+      "poster": "media/sinais/obrigado-parado.svg",
+      "how": "Mão aberta, dedos unidos, polegar afastado. As pontas dos dedos tocam o lado da testa, como numa continência, e a mão se afasta para a frente e para o lado, na altura da testa.",
+      "params": {
+        "handshape": "Mão aberta, dedos unidos, polegar afastado",
+        "location": "Lado da testa, do lado da mão que sinaliza",
+        "movement": "Da testa para a frente e para o lado, uma vez",
+        "orientation": "Palma voltada para a cabeça; o dorso fica para a frente",
+        "expression": "Amigável"
+      }
+    },
+    {
+      "id": "voce",
+      "word": "você",
+      "aliases": [
+        "voce",
+        "vc",
+        "tu"
+      ],
+      "category": "pessoas",
+      "image": "media/sinais/voce.svg",
+      "poster": "media/sinais/voce-parado.svg",
+      "how": "Mão fechada com o indicador estendido, apontando para a pessoa com quem se fala. A direção acompanha onde a pessoa está.",
+      "params": {
+        "handshape": "Indicador estendido, polegar sobre o dedo médio, demais dedos fechados",
+        "location": "Espaço neutro, à frente do corpo, na direção da pessoa",
+        "movement": "Curto, em direção à pessoa",
+        "orientation": "Palma para baixo",
+        "expression": "Olhar dirigido à pessoa"
+      }
+    }
+  ]
+}
