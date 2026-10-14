@@ -19,10 +19,8 @@
   --shadow: 0 1px 2px rgb(20 27 45 / .06), 0 6px 20px rgb(20 27 45 / .07);
 
   /* Category colors (always paired with an icon and a label). */
-  --cat-cumprimentos: #f59e0b;
-  --cat-familia: #ec4899;
-  --cat-comida: #16a34a;
-  --cat-pessoas: #7c3aed;
+  --cat-basico: #0d9488;
+  --cat-tecnologia: #7c3aed;
   --cat-outros: #64748b;
 
   --radius: 18px;
@@ -207,13 +205,44 @@ a { color: var(--brand); }
 .param dt { display: flex; align-items: center; gap: 7px; font-weight: 800; font-size: .85rem; color: var(--muted); }
 .param dt .icon { width: 17px; height: 17px; color: var(--brand); }
 .param dd { margin: 0; font-size: .95rem; }
+/* Handshape picture next to its description */
+.hs { display: flex; align-items: center; gap: 12px; }
+.hs img { width: 84px; height: 84px; flex: none; border-radius: 12px; background: var(--stage); border: 1px solid var(--line); padding: 4px; }
 @media (max-width: 380px) { .param { grid-template-columns: 1fr; gap: 2px; } }
 .sign-note { display: flex; gap: 8px; margin: 0; padding: 10px 12px; border-radius: var(--radius-sm); background: var(--brand-soft); font-size: .92rem; }
 .sign-note .icon { color: var(--brand); margin-top: 2px; }
 
 /* Lists */
+/* Category filter */
+.cats { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; }
+.cat-chip {
+  --cat: var(--brand);
+  display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 16px 0 12px;
+  border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink);
+  font-weight: 700; font-size: .95rem; cursor: pointer;
+}
+.cat-chip .icon { color: var(--cat); width: 19px; height: 19px; }
+.cat-chip .count { font-weight: 600; color: var(--muted); font-size: .85em; }
+.cat-chip[aria-pressed="true"] { background: var(--cat); border-color: var(--cat); color: #fff; }
+.cat-chip[aria-pressed="true"] .icon, .cat-chip[aria-pressed="true"] .count { color: #fff; }
+
+/* Category sections on the home screen */
+.cat-section { margin: 18px 0 24px; }
+.cat-head {
+  --cat: var(--cat-outros);
+  display: flex; align-items: center; gap: 12px; margin-bottom: 12px; padding: 10px 12px;
+  border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--line);
+  border-left: 6px solid var(--cat);
+}
+.cat-head .cat-ico { display: grid; place-items: center; width: 42px; height: 42px; flex: none; border-radius: 12px; background: var(--cat); color: #fff; }
+.cat-head .cat-ico .icon { width: 24px; height: 24px; }
+.cat-head h2 { margin: 0; font-family: var(--font-display); font-size: 1.25rem; line-height: 1.15; }
+.cat-head p { margin: 0; color: var(--muted); font-size: .88rem; }
+.cat-head .count { margin-left: auto; font-weight: 800; color: var(--muted); white-space: nowrap; }
+.section-empty { margin: 0; padding: 18px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: var(--radius-sm); }
+
 .section-title {
-  display: flex; align-items: center; gap: 8px; margin: 6px 0 10px;
+  display: flex; align-items: center; gap: 8px; margin: 14px 0 10px;
   font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 800;
 }
 .section-title .count { font-weight: 600; opacity: .8; }

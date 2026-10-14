@@ -4,7 +4,7 @@
 // with a short timeout, so a deploy shows up on the next visit.
 // CACHE is stamped by scripts/versao.py from the content of the site: any change makes a new
 // version, install re-caches everything and open pages reload once.
-const CACHE = 'sinais-06c8552291';
+const CACHE = 'sinais-abf9f01a73';
 const CORE = [
   './', 'index.html', 'css/app.css', 'js/app.js', 'js/search.js', 'data/sinais.json',
   'manifest.webmanifest', 'icons/icon.svg', 'icons/apple-touch-icon.png',
@@ -22,7 +22,7 @@ self.addEventListener('install', event => {
     const res = await cache.match('data/sinais.json');
     if (res) {
       const data = await res.json();
-      const media = data.signs.flatMap(s => [s.image, s.poster]).filter(Boolean);
+      const media = data.signs.flatMap(s => [s.image, s.poster, s.handshapeImage]).filter(Boolean);
       const results = await Promise.allSettled(media.map(url => cache.add(new Request(url, { cache: 'reload' }))));
       results.forEach((r, i) => r.status === 'rejected' && console.warn('SW: not cached', media[i]));
     }

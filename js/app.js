@@ -19,6 +19,7 @@ const ICONS = {
   people: '<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9.5" r="2.4"/><path d="M15.6 14.4A4.6 4.6 0 0 1 21 19"/>',
   cup: '<path d="M5 9h12v4a6 6 0 0 1-12 0z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 3v3M11 3v3M14 3v3"/>',
   person: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  laptop: '<rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/>',
   tag: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/>',
 };
 
@@ -52,6 +53,7 @@ const state = {
   featured: null,     // sign shown big
   shownMedia: null,   // id of the sign whose drawing is in the page (so typing doesn't restart it)
   playMotion: false,  // reduced-motion users asked to see the movement
+  category: null,     // category filter (id), null = all
   recentTimer: 0,
 };
 
@@ -61,6 +63,7 @@ const els = {
   status: $('#status'),
   announce: $('#announce'),
   alts: $('#alts'),
+  cats: $('#cats'),
   feature: $('#feature'),
   results: $('#results'),
   foot: $('#foot-note'),
@@ -134,13 +137,14 @@ function render() {
   els.clear.hidden = !query;
   els.searchbox.classList.toggle('has-text', Boolean(query));
 
-  state.results = hasQuery ? search(state.index, query) : [];
+  state.results = hasQuery ? search(state.index, query).filter(r => inCategory(r.sign)) : [];
   const picked = pickedFromHash();
   // The picked sign wins while it is still a match; otherwise the best match is shown.
   state.featured = hasQuery
     ? state.results.find(r => r.sign === picked)?.sign ?? state.results[0]?.sign ?? null
     : picked;
 
+  renderCats();
   renderStatus(query, hasQuery);
   const alts = altsHtml(query);
   els.alts.innerHTML = alts;
@@ -158,13 +162,26 @@ function render() {
   }
 }
 
+const inCategory = sign => !state.category || sign.category === state.category;
+
+function renderCats() {
+  const counts = new Map();
+  for (const s of state.data.signs) counts.set(s.category, (counts.get(s.category) ?? 0) + 1);
+  const chip = (id, name, iconName, color, count) => `
+    <button class="cat-chip" type="button" data-cat="${esc(id ?? '')}" aria-pressed="${state.category === id}"
+      style="--cat: ${color ? `var(--cat-${esc(color)})` : 'var(--brand)'}">${icon(iconName)}${esc(name)} <span class="count">${count}</span></button>`;
+  els.cats.innerHTML = chip(null, 'Todas', 'grid', null, state.data.signs.length)
+    + state.data.categories.map(c => chip(c.id, c.name, c.icon, c.color ?? c.id, counts.get(c.id) ?? 0)).join('');
+}
+
 function renderStatus(query, hasQuery) {
   els.status.classList.remove('is-fuzzy');
   if (!hasQuery) {
     els.status.textContent = '';
     return;
   }
-  const q = `“<strong>${esc(query.trim())}</strong>”`;
+  const where = state.category ? ` em <strong>${esc(state.categories.get(state.category)?.name)}</strong>` : '';
+  const q = `“<strong>${esc(query.trim())}</strong>”${where}`;
   const n = state.results.length;
   if (!n) {
     els.status.innerHTML = `Nenhum sinal para ${q}`;
@@ -251,7 +268,9 @@ function featureInfoHtml(sign, query) {
     ${params.length ? `
     <dl class="params">
       ${params.map(([key, label, ic]) => `
-        <div class="param"><dt>${icon(ic)}${esc(label)}</dt><dd>${esc(sign.params[key])}</dd></div>`).join('')}
+        <div class="param"><dt>${icon(ic)}${esc(label)}</dt><dd>${key === 'handshape' && sign.handshapeImage
+          ? `<span class="hs"><img src="${esc(sign.handshapeImage)}" alt="Configuração de mão: ${esc(sign.params[key])}" loading="lazy"><span>${esc(sign.params[key])}</span></span>`
+          : esc(sign.params[key])}</dd></div>`).join('')}
     </dl>` : ''}
     ${sign.regionalNote ? `<p class="sign-note">${icon('info')}<span><b>Variação regional.</b> ${esc(sign.regionalNote)}</span></p>` : ''}`;
 }
@@ -280,7 +299,23 @@ function emptyHtml(query) {
 }
 
 function browseHtml() {
-  const recent = readRecent().map(id => state.byId.get(id));
+  const recent = readRecent().map(id => state.byId.get(id)).filter(inCategory);
+  // One section per category, each with its own color and icon.
+  const sections = state.data.categories
+    .filter(c => !state.category || c.id === state.category)
+    .map(c => {
+      const signs = state.sorted.filter(s => s.category === c.id);
+      return `
+      <section class="cat-section" aria-labelledby="cat-${esc(c.id)}">
+        <header class="cat-head" style="--cat: var(--cat-${esc(c.color ?? c.id)})">
+          <span class="cat-ico">${icon(c.icon)}</span>
+          <div><h2 id="cat-${esc(c.id)}">${esc(c.name)}</h2>${c.description ? `<p>${esc(c.description)}</p>` : ''}</div>
+          <span class="count">${plural(signs.length, 'sinal', 'sinais')}</span>
+        </header>
+        ${signs.length ? `<div class="grid">${signs.map(s => cardHtml(s, s === state.featured)).join('')}</div>`
+          : '<p class="section-empty">Em breve.</p>'}
+      </section>`;
+    }).join('');
   return `
     ${recent.length ? `
     <h2 class="section-title">${icon('clock')}Recentes</h2>
@@ -288,8 +323,7 @@ function browseHtml() {
       ${recent.map(s => `<a class="recent-chip" href="${signHref(s)}" style="${catStyle(s)}">
         <img src="${esc(s.poster ?? s.image)}" alt="" loading="lazy">${esc(s.word)}</a>`).join('')}
     </div>` : ''}
-    <h2 class="section-title">${icon('grid')}Todos os sinais <span class="count">${state.sorted.length}</span></h2>
-    <div class="grid">${state.sorted.map(s => cardHtml(s, s === state.featured)).join('')}</div>`;
+    ${sections}`;
 }
 
 // ---------- Selection (hash) ----------
@@ -313,6 +347,7 @@ function announce(text) {
 function onHashChange() {
   const picked = pickedFromHash();
   if (picked) remember(picked);
+  if (picked && !inCategory(picked)) state.category = null;
   // A link to a sign that the current search doesn't include: show the sign, drop the search.
   if (picked && normalize(els.q.value) && !search(state.index, els.q.value).some(r => r.sign === picked)) {
     els.q.value = '';
@@ -337,6 +372,7 @@ function step(delta) {
 
 function goHome() {
   els.q.value = '';
+  state.category = null;
   if (location.hash && location.hash !== '#/') history.replaceState(null, '', '#/');
   render();
   window.scrollTo({ top: 0 });
@@ -369,6 +405,15 @@ els.clear.addEventListener('click', () => {
 $('.brand').addEventListener('click', e => {
   e.preventDefault();
   goHome();
+});
+els.cats.addEventListener('click', e => {
+  const chip = e.target.closest('.cat-chip');
+  if (!chip) return;
+  state.category = chip.dataset.cat || null;
+  // A picked sign from another category no longer applies.
+  const picked = pickedFromHash();
+  if (picked && !inCategory(picked)) history.replaceState(null, '', '#/');
+  render();
 });
 document.addEventListener('click', e => {
   const action = e.target.closest('[data-action]')?.dataset.action;
