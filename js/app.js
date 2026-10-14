@@ -113,6 +113,7 @@ async function load() {
   state.byId = new Map(data.signs.map(s => [s.id, s]));
   state.categories = new Map(data.categories.map(c => [c.id, c]));
   els.foot.innerHTML = footerHtml(data);
+  buildCats();
   const picked = pickedFromHash();
   if (picked) remember(picked);
   render();
@@ -126,7 +127,8 @@ function footerHtml(data) {
 }
 
 const categoryOf = sign => state.categories.get(sign.category) ?? { id: 'outros', name: 'Outros', icon: 'tag', color: 'outros' };
-const catStyle = sign => `--cat: var(--cat-${esc(categoryOf(sign).color ?? sign.category)})`;
+const catVar = color => `var(--cat-${esc(color)}, var(--cat-outros))`;
+const catStyle = sign => `--cat: ${catVar(categoryOf(sign).color ?? sign.category)}`;
 
 // ---------- Rendering ----------
 
@@ -137,14 +139,20 @@ function render() {
   els.clear.hidden = !query;
   els.searchbox.classList.toggle('has-text', Boolean(query));
 
-  state.results = hasQuery ? search(state.index, query).filter(r => inCategory(r.sign)) : [];
+  const all = hasQuery ? search(state.index, query) : [];
+  const filtered = all.filter(r => inCategory(r.sign));
+  const realHit = list => list.some(r => r.kind !== 'typo');
+  // A typed lookup is never hidden by the category filter: if the word only exists in another
+  // category, show it anyway and say where it is.
+  state.outside = Boolean(state.category && hasQuery && !realHit(filtered) && realHit(all));
+  state.results = state.outside ? all : filtered;
   const picked = pickedFromHash();
   // The picked sign wins while it is still a match; otherwise the best match is shown.
   state.featured = hasQuery
     ? state.results.find(r => r.sign === picked)?.sign ?? state.results[0]?.sign ?? null
     : picked;
 
-  renderCats();
+  updateCats(hasQuery);
   renderStatus(query, hasQuery);
   const alts = altsHtml(query);
   els.alts.innerHTML = alts;
@@ -164,14 +172,22 @@ function render() {
 
 const inCategory = sign => !state.category || sign.category === state.category;
 
-function renderCats() {
+// The chips are built once (so a click keeps keyboard focus) and only updated afterwards.
+function buildCats() {
   const counts = new Map();
   for (const s of state.data.signs) counts.set(s.category, (counts.get(s.category) ?? 0) + 1);
   const chip = (id, name, iconName, color, count) => `
-    <button class="cat-chip" type="button" data-cat="${esc(id ?? '')}" aria-pressed="${state.category === id}"
-      style="--cat: ${color ? `var(--cat-${esc(color)})` : 'var(--brand)'}">${icon(iconName)}${esc(name)} <span class="count">${count}</span></button>`;
+    <button class="cat-chip" type="button" data-cat="${esc(id ?? '')}" data-name="${esc(name)}" data-count="${count}"
+      aria-pressed="false" style="${color ? `--cat: ${catVar(color)}` : '--cat: var(--brand); --cat-ink: var(--brand-ink)'}">
+      ${icon(iconName)}${esc(name)} <span class="count">${count}<span class="sr-only"> ${count === 1 ? 'sinal' : 'sinais'}</span></span></button>`;
   els.cats.innerHTML = chip(null, 'Todas', 'grid', null, state.data.signs.length)
     + state.data.categories.map(c => chip(c.id, c.name, c.icon, c.color ?? c.id, counts.get(c.id) ?? 0)).join('');
+}
+
+function updateCats(hasQuery) {
+  els.cats.querySelectorAll('.cat-chip').forEach(b => b.setAttribute('aria-pressed', String((b.dataset.cat || null) === state.category)));
+  // While typing without a filter, the chips step aside so the sign stays above the keyboard.
+  els.cats.hidden = hasQuery && !state.category;
 }
 
 function renderStatus(query, hasQuery) {
@@ -180,10 +196,13 @@ function renderStatus(query, hasQuery) {
     els.status.textContent = '';
     return;
   }
-  const where = state.category ? ` em <strong>${esc(state.categories.get(state.category)?.name)}</strong>` : '';
+  const where = state.category && !state.outside ? ` em <strong>${esc(state.categories.get(state.category)?.name)}</strong>` : '';
   const q = `“<strong>${esc(query.trim())}</strong>”${where}`;
   const n = state.results.length;
-  if (!n) {
+  if (state.outside) {
+    const home = state.categories.get(state.results.find(r => r.kind !== 'typo').sign.category)?.name;
+    els.status.innerHTML = `“<strong>${esc(query.trim())}</strong>” está em <strong>${esc(home)}</strong>, fora do filtro ${esc(state.categories.get(state.category)?.name)}`;
+  } else if (!n) {
     els.status.innerHTML = `Nenhum sinal para ${q}`;
   } else if (state.results.every(r => r.kind === 'typo')) {
     // Only near-misses: say clearly that this is not the word typed ("doce" is not "você").
@@ -268,8 +287,8 @@ function featureInfoHtml(sign, query) {
     ${params.length ? `
     <dl class="params">
       ${params.map(([key, label, ic]) => `
-        <div class="param"><dt>${icon(ic)}${esc(label)}</dt><dd>${key === 'handshape' && sign.handshapeImage
-          ? `<span class="hs"><img src="${esc(sign.handshapeImage)}" alt="Configuração de mão: ${esc(sign.params[key])}" loading="lazy"><span>${esc(sign.params[key])}</span></span>`
+        <div class="param${key === 'handshape' && sign.handshapeImage ? ' param-hs' : ''}"><dt>${icon(ic)}${esc(label)}</dt><dd>${key === 'handshape' && sign.handshapeImage
+          ? `<span class="hs"><img src="${esc(sign.handshapeImage)}" alt="" loading="lazy"><span>${esc(sign.params[key])}</span></span>`
           : esc(sign.params[key])}</dd></div>`).join('')}
     </dl>` : ''}
     ${sign.regionalNote ? `<p class="sign-note">${icon('info')}<span><b>Variação regional.</b> ${esc(sign.regionalNote)}</span></p>` : ''}`;
@@ -370,6 +389,14 @@ function step(delta) {
   announce(`${next.word}, ${at + delta < 0 ? state.results.length : ((at + delta) % state.results.length) + 1} de ${state.results.length}`);
 }
 
+// Clears the typed word but keeps the category filter (X button, Escape).
+function clearSearch() {
+  els.q.value = '';
+  if (location.hash && location.hash !== '#/') history.replaceState(null, '', '#/');
+  render();
+}
+
+// Full reset: no word, no filter (logo, "Ver todos os sinais").
 function goHome() {
   els.q.value = '';
   state.category = null;
@@ -396,10 +423,10 @@ els.q.addEventListener('keydown', e => {
     remember(state.featured);
     els.q.blur(); // closes the phone keyboard so the whole sign is visible
   }
-  if (e.key === 'Escape' && els.q.value) goHome();
+  if (e.key === 'Escape' && els.q.value) clearSearch();
 });
 els.clear.addEventListener('click', () => {
-  goHome();
+  clearSearch();
   els.q.focus();
 });
 $('.brand').addEventListener('click', e => {
@@ -409,7 +436,9 @@ $('.brand').addEventListener('click', e => {
 els.cats.addEventListener('click', e => {
   const chip = e.target.closest('.cat-chip');
   if (!chip) return;
-  state.category = chip.dataset.cat || null;
+  const id = chip.dataset.cat || null;
+  state.category = id && id === state.category ? null : id;   // tapping the active chip turns it off
+  announce(state.category ? `${chip.dataset.name}: ${plural(Number(chip.dataset.count), 'sinal', 'sinais')}` : 'Todas as categorias');
   // A picked sign from another category no longer applies.
   const picked = pickedFromHash();
   if (picked && !inCategory(picked)) history.replaceState(null, '', '#/');

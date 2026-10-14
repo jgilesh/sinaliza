@@ -19,9 +19,10 @@
   --shadow: 0 1px 2px rgb(20 27 45 / .06), 0 6px 20px rgb(20 27 45 / .07);
 
   /* Category colors (always paired with an icon and a label). */
-  --cat-basico: #0d9488;
+  --cat-basico: #0f766e;
   --cat-tecnologia: #7c3aed;
   --cat-outros: #64748b;
+  --cat-ink: #ffffff;   /* text on a category color */
 
   --radius: 18px;
   --radius-sm: 12px;
@@ -44,6 +45,9 @@
     --brand-ink: #0b1020;
     --brand-soft: #1f2a4d;
     --mark: #6b5310;
+    --cat-basico: #2dd4bf;
+    --cat-tecnologia: #a78bfa;
+    --cat-ink: #0b1020;
     --warn-bg: #4a3a0b;
     --warn-ink: #ffe7a3;
     --focus: #9db4ff;
@@ -207,7 +211,12 @@ a { color: var(--brand); }
 .param dd { margin: 0; font-size: .95rem; }
 /* Handshape picture next to its description */
 .hs { display: flex; align-items: center; gap: 12px; }
-.hs img { width: 84px; height: 84px; flex: none; border-radius: 12px; background: var(--stage); border: 1px solid var(--line); padding: 4px; }
+.hs img { width: 112px; height: 112px; flex: none; border-radius: 12px; background: var(--stage); border: 1px solid var(--line); padding: 4px; }
+/* On phones the handshape row stacks, so the picture can be big and the text gets the full width. */
+@media (max-width: 520px) {
+  .param-hs { grid-template-columns: 1fr; gap: 6px; }
+  .hs img { width: 132px; height: 132px; }
+}
 @media (max-width: 380px) { .param { grid-template-columns: 1fr; gap: 2px; } }
 .sign-note { display: flex; gap: 8px; margin: 0; padding: 10px 12px; border-radius: var(--radius-sm); background: var(--brand-soft); font-size: .92rem; }
 .sign-note .icon { color: var(--brand); margin-top: 2px; }
@@ -223,8 +232,8 @@ a { color: var(--brand); }
 }
 .cat-chip .icon { color: var(--cat); width: 19px; height: 19px; }
 .cat-chip .count { font-weight: 600; color: var(--muted); font-size: .85em; }
-.cat-chip[aria-pressed="true"] { background: var(--cat); border-color: var(--cat); color: #fff; }
-.cat-chip[aria-pressed="true"] .icon, .cat-chip[aria-pressed="true"] .count { color: #fff; }
+.cat-chip[aria-pressed="true"] { background: var(--cat); border-color: var(--cat); color: var(--cat-ink); }
+.cat-chip[aria-pressed="true"] .icon, .cat-chip[aria-pressed="true"] .count { color: var(--cat-ink); }
 
 /* Category sections on the home screen */
 .cat-section { margin: 18px 0 24px; }
@@ -234,7 +243,7 @@ a { color: var(--brand); }
   border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--line);
   border-left: 6px solid var(--cat);
 }
-.cat-head .cat-ico { display: grid; place-items: center; width: 42px; height: 42px; flex: none; border-radius: 12px; background: var(--cat); color: #fff; }
+.cat-head .cat-ico { display: grid; place-items: center; width: 42px; height: 42px; flex: none; border-radius: 12px; background: var(--cat); color: var(--cat-ink); }
 .cat-head .cat-ico .icon { width: 24px; height: 24px; }
 .cat-head h2 { margin: 0; font-family: var(--font-display); font-size: 1.25rem; line-height: 1.15; }
 .cat-head p { margin: 0; color: var(--muted); font-size: .88rem; }

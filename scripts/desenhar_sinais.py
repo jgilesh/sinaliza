@@ -31,6 +31,7 @@ LIPS = '#b9605a'
 GOLD = '#c9a24a'
 ACCENT = '#f26b2d'
 NAIL = '#f7e0d0'
+CREASE_INK = '#a96c4c'   # knuckle creases: dark enough to read on a phone
 LINE = 1.7          # visible outline width
 ARM_UPPER, ARM_FORE = 118.0, 104.0
 SHOULDER = {'right': (146.0, 192.0), 'left': (254.0, 192.0)}   # signer's right = viewer's left
@@ -120,7 +121,7 @@ def hs_1_curved():
     """Index up with the tip slightly curled forward, others closed, thumb over the middle
     finger (INES 15)."""
     shape = {'index': (2, (0, 14, 26)), 'middle': CURL, 'ring': CURL, 'pinky': CURL}
-    shape['thumb'] = solve_thumb(shape, (3.0, -27.0, 20.0), start=(-10, 50, 30, 10))
+    shape['thumb'] = solve_thumb(shape, (3.0, -27.0, 12.0), start=(-10, 50, 30, 10))
     return shape
 
 
@@ -133,22 +134,21 @@ def hs_B():
 def hs_L(index_flex=(0, 0, 0)):
     """Index up, thumb sideways, other fingers closed (INES 8)."""
     return {'index': (2, index_flex), 'middle': (CURL[0] - 2, CURL[1]), 'ring': (CURL[0], CURL[1]),
-            'pinky': (CURL[0] + 2, CURL[1]), 'thumb': (86, (4, 6, 0))}
+            'pinky': (CURL[0] + 2, CURL[1]), 'thumb': (70, (10, 8, 0))}
 
 
 def hs_1():
     """Index straight, others closed, thumb over the middle finger (INES 14)."""
     shape = {'index': (2, (0, 0, 0)), 'middle': CURL, 'ring': CURL, 'pinky': CURL}
-    shape['thumb'] = solve_thumb(shape, (3.0, -27.0, 20.0), start=(-10, 50, 30, 10))
+    shape['thumb'] = solve_thumb(shape, (3.0, -27.0, 12.0), start=(-10, 50, 30, 10))
     return shape
 
 
 def hs_F():
-    """Index bent sideways at the knuckle, lying across toward the thumb, whose tip touches it;
-    other three fingers open (INES 54)."""
-    shape = {'index': (6, (80, 18, 6), 70), 'middle': (5, (0, 0, 0)), 'ring': (-3, (0, 0, 0)), 'pinky': (-12, (0, 0, 0))}
+    """Index hooked down onto the thumb tip; other three fingers open and spread (INES 54)."""
+    shape = {'index': (0, (70, 40, 15), 20), 'middle': (5, (0, 0, 0)), 'ring': (-3, (0, 0, 0)), 'pinky': (-12, (0, 0, 0))}
     tip = chain(FINGERS['index'][0], FINGERS['index'][1], *shape['index'])[-1]
-    shape['thumb'] = solve_thumb(shape, (tip[0] + 0.5, tip[1] + 4.5, tip[2]))
+    shape['thumb'] = solve_thumb(shape, (tip[0], tip[1] + 1.5, tip[2] + 2.0))
     return shape
 
 
@@ -156,7 +156,7 @@ def hs_F_round():
     """Index and thumb tips together in a ring, other three fingers open (INES 55)."""
     # The index curls sideways toward the thumb, so the ring lies in the palm plane and its
     # hole shows when the palm faces the viewer (like an "OK" sign).
-    shape = {'index': (14, (10, 70, 70), 85), 'middle': (-4, (0, 0, 0)), 'ring': (-11, (0, 0, 0)), 'pinky': (-19, (0, 0, 0))}
+    shape = {'index': (10, (25, 60, 50), 85), 'middle': (-4, (0, 0, 0)), 'ring': (-11, (0, 0, 0)), 'pinky': (-19, (0, 0, 0))}
     tip = chain(FINGERS['index'][0], FINGERS['index'][1], *shape['index'])[-1]
     shape['thumb'] = solve_thumb(shape, (tip[0] + 1.0, tip[1] + 3.0, tip[2]), start=(40, 10, 10, 10))
     return shape
@@ -228,14 +228,25 @@ def hand_geometry(pose, mirror):
         if mirror:
             dx = -dx
         nail_z = rot((dx, dy, dz), yaw, pitch, roll)[2]
-        geo['digits'][name] = {'pts': pts, 'front': depth > 3.5 or name == 'thumb' and depth > -2, 'w': w,
-                               'pad': (x3, y3, w * 0.78) if toward > 0.8 and name != 'thumb' else None,
+        bent = sum(shape[name][1]) >= 45
+        # Straight fingers stay behind the palm so they grow out of the knuckle line; only bent
+        # fingers (and the thumb) can sit in front of it.
+        front = (depth > 3.5 and (bent or name == 'thumb')) or (name == 'thumb' and depth > -2)
+        if pose.get('ring') and name in ('index', 'thumb'):
+            front = True   # paint the ring fingers over their own shaded opening
+        geo['digits'][name] = {'pts': pts, 'front': front, 'w': w,
+                               'pad': (x3, y3, w * TAPER[2] * 0.55) if toward > 0.93 and name != 'thumb' else None,
                                'creases': [crease(pts, j, w) for j in (1, 2)],
                                'nail': nail(pts, w) if nail_z > 0.2 else None}
     if pose.get('ring'):
         # The opening of a thumb-index ring, shaded so it reads as a hole even over the face.
         ix, th = geo['digits']['index']['pts'], geo['digits']['thumb']['pts']
-        geo['hole'] = [(q[0], q[1]) for q in ix[1:] + th[1:][::-1]]
+        ring_pts = [(q[0], q[1]) for q in ix[1:] + th[1:][::-1]]
+        cx, cy = sum(q[0] for q in ring_pts) / len(ring_pts), sum(q[1] for q in ring_pts) / len(ring_pts)
+        half = geo['digits']['index']['w'] * 0.5
+        # Pull the outline in by half a finger width, so only the real opening is shaded.
+        geo['hole'] = [(x + (cx - x) * min(1, half / max(math.hypot(cx - x, cy - y), 1e-6)) * 0.9,
+                        y + (cy - y) * min(1, half / max(math.hypot(cx - x, cy - y), 1e-6)) * 0.9) for x, y in ring_pts]
     return geo
 
 
@@ -331,7 +342,7 @@ SIGNS = {}
 
 # ÁGUA: L hand, palm forward, thumb tip on the chin; the index bends into a hook and
 # straightens, repeatedly.
-up, bent = hs_L(), hs_L((55, 80, 30))
+up, bent = hs_L(), hs_L((12, 95, 50))   # bent: the index stays up and hooks at the middle joint
 water = lambda shape: P((188, 137), shape, 'thumb_tip', yaw=15, roll=-8, scale=1.05, pole=(0.55, 1.0, 0.5))
 SIGNS['agua'] = {
     'poster': 0.0, 'dur': 2.0, 'hands': ['right'], 'handshape': up,
@@ -351,19 +362,19 @@ SIGNS['cafe'] = {
     'poster': 0.0, 'dur': 2.4, 'hands': ['right'], 'handshape': ring, 'handshape_ring': True,
     'keys': [(0.0, [up_c]), (0.25, [up_c]), (0.5, [turned_c]), (0.75, [up_c]), (1.0, [turned_c]),
              (1.25, [up_c]), (2.4, [up_c])],
-    'marks': [(194, 127, 70)],
+    'marks': [(184, 132, 200)],
     'arrows': [{'twist': 0, 'at': 0.0, 'r': (17, 6), 'drop': 4}],
 }
 
 # FAMÍLIA: both hands in F, palms forward, rings together in front of the chest; the hands
 # draw a horizontal semicircle outward and forward and meet by the little fingers, palms back.
 f = hs_F()
-start_r = P((191, 192), f, 'index_tip', yaw=10, roll=-8, scale=1.0, depth=60)
-open_r = P((128, 184), f, 'index_tip', yaw=40, pitch=-28, roll=-10, scale=1.05, depth=85, via=(150, 200))
-end_r = P((197, 176), f, 'pinky_tip', yaw=172, roll=6, scale=1.1, depth=100, via=(136, 196))
+start_r = P((189, 192), f, 'index_tip', yaw=35, roll=-8, scale=1.25, depth=60)
+open_r = P((124, 184), f, 'index_tip', yaw=45, pitch=-28, roll=-10, scale=1.3, depth=85, via=(148, 200))
+end_r = P((197, 176), f, 'pinky_tip', yaw=172, roll=6, scale=1.35, depth=100, via=(132, 196))
 rewind_r = dict(start_r, via=(150, 275))   # back to the start low and apart, so the hands never cross
 SIGNS['familia'] = {
-    'poster': 0.0, 'dur': 2.8, 'hands': ['right', 'left'], 'handshape': f,
+    'poster': 0.0, 'dur': 2.8, 'hands': ['right', 'left'], 'handshape': f, 'handshape_view': {'yaw': 30},
     'keys': [(0.0, [start_r, mirrored(start_r)]), (0.3, [start_r, mirrored(start_r)]),
              (0.8, [open_r, mirrored(open_r)]), (1.3, [end_r, mirrored(end_r)]),
              (2.0, [end_r, mirrored(end_r)]), (2.8, [rewind_r, mirrored(rewind_r)])],
@@ -388,7 +399,9 @@ SIGNS['obrigado'] = {
 
 # VOCÊ: the index points forward, at the person you are talking to. No contact with the body.
 one = hs_1()
-point = lambda s: P((196, 184), one, 'index_tip', yaw=-10, pitch=72, roll=0, scale=s, depth=80)
+one_point = dict(one)   # tipped forward: the thumb lies across the fist instead of hanging below it
+one_point['thumb'] = solve_thumb(one_point, (-3.0, -31.0, 16.0), start=(-10, 50, 30, 10))
+point = lambda s: P((196, 184), one_point, 'index_tip', yaw=-35, pitch=50, roll=-20, scale=s, depth=80)
 SIGNS['voce'] = {
     'poster': 0.7, 'dur': 2.0, 'hands': ['right'], 'handshape': one,
     'keys': [(0.0, [point(0.94)]), (0.3, [point(1.14)]), (1.6, [point(1.14)]), (2.0, [point(0.94)])],
@@ -402,7 +415,7 @@ SIGNS['voce'] = {
 # sides. Twice, then a short hold with the index fingers in a slight V. (INES, UFSC Signbank
 # and UFV agree; INES timing.)
 pc = hs_1_curved()
-CX, CY, R = 166, 182, 22
+CX, CY, R = 169, 180, 28
 
 
 def pc_pose(angle):
@@ -410,32 +423,36 @@ def pc_pose(angle):
     a = math.radians(angle)
     at = (CX + R * math.cos(a), CY + R * math.sin(a))
     lean = 9 * math.cos(a)   # tips lean in near the midline, splay out on the outer side
-    return P(at, pc, 'index_tip', yaw=4, roll=lean, scale=1.0, depth=85, pole=(0.25, 1.0, 0.3), ease='linear')
+    return P(at, pc, 'index_tip', yaw=4, roll=lean, scale=1.25, depth=85, pole=(0.25, 1.0, 0.3), ease='linear')
 
 
 start_angle = -135          # top-outer: the hands start up and apart
 circle = [start_angle + 30 * k for k in range(25)]   # two full turns, clockwise on screen
-pc_keys = [(0.0, [dict(pc_pose(start_angle), ease='smooth')] * 2)]
+pc_keys = [(0.0, [pc_pose(start_angle), mirrored(pc_pose(start_angle))])]
 for k, ang in enumerate(circle[1:], 1):
     pose = pc_pose(ang)
     pc_keys.append((0.05 + 1.4 * k / 24, [pose, mirrored(pose)]))
-pc_keys[0] = (0.0, [pc_pose(start_angle), mirrored(pc_pose(start_angle))])
-pc_keys.append((2.3, [pc_pose(start_angle), mirrored(pc_pose(start_angle))]))
+hold = dict(pc_pose(start_angle), roll=-20, ease='smooth')   # INES ends with the index fingers in a V
+pc_keys += [(1.6, [hold, mirrored(hold)]), (2.1, [hold, mirrored(hold)]),
+            (2.3, [pc_pose(start_angle), mirrored(pc_pose(start_angle))])]
 
 
 def circle_arrow(cx, cy, r, a0, a1, clockwise):
     x0, y0 = cx + r * math.cos(math.radians(a0)), cy + r * math.sin(math.radians(a0))
     x1, y1 = cx + r * math.cos(math.radians(a1)), cy + r * math.sin(math.radians(a1))
-    large = 1 if (a1 - a0) % 360 > 180 else 0
+    span = (a1 - a0) % 360 if clockwise else (a0 - a1) % 360
+    large = 1 if span > 180 else 0
     return f'M {x0:.1f} {y0:.1f} A {r} {r} 0 {large} {1 if clockwise else 0} {x1:.1f} {y1:.1f}'
 
 
 SIGNS['computador'] = {
-    'poster': 1.8, 'dur': 2.3, 'hands': ['right', 'left'], 'handshape': pc,
+    'poster': 1.8, 'dur': 2.3, 'hands': ['right', 'left'], 'handshape': pc, 'handshape_view': {'yaw': 55},
     'keys': pc_keys,
     # Above the fingertips: the right hand turns clockwise (in at the top), the left mirrors it.
-    'arrows': [{'d': circle_arrow(CX, CY, R + 13, 165, 330, True)},
-               {'d': circle_arrow(2 * 200 - CX, CY, R + 13, 15, 210, False)}],
+    # On the outer side of each circle: up the outside, then in at the top (the inner side is
+    # where the fingers meet, so arrows there would cross each other).
+    'arrows': [{'d': circle_arrow(CX, CY, R + 10, 100, 290, True)},
+               {'d': circle_arrow(2 * 200 - CX, CY, R + 10, 80, 250, False)}],
     'mirror_second': True,
 }
 
@@ -717,7 +734,7 @@ def sign_svg(sid, sign, frames, frame=None, title=''):
             w = sum(h['digits'][name]['w'] for h in hands) / len(hands)
             out = ''.join(use(f'{hid}-{name}-s{k}', stroke(INK, w * TAPER[k] + 2 * LINE), vis) for k in range(3))
             out += ''.join(use(f'{hid}-{name}-s{k}', stroke(SKIN, w * TAPER[k]), vis) for k in range(3))
-            out += ''.join(use(f'{hid}-{name}-c{j}', stroke(SKIN_DARK, 1.2), vis) for j in range(2))
+            out += ''.join(use(f'{hid}-{name}-c{j}', stroke(CREASE_INK, 1.4), vis) for j in range(2))
             nail_vis = ['visible' if v == 'visible' and h['digits'][name]['nail'] else 'hidden' for v, h in zip(vis, hands)]
             if any(v == 'visible' for v in nail_vis):
                 nw = w * 0.5
@@ -746,17 +763,18 @@ def sign_svg(sid, sign, frames, frame=None, title=''):
             cy, k2 = A.attr('cy', [num(p[1]) for p in pads])
             r, k3 = A.attr('r', [num(p[2] + LINE) for p in pads])
             r2, k4 = A.attr('r', [num(p[2]) for p in pads])
-            ny, k5 = A.attr('cy', [num(p[1] - p[2] * 0.38) for p in pads])
-            rn, k6 = A.attr('r', [num(p[2] * 0.42) for p in pads])
+            ny, k5 = A.attr('cy', [num(p[1] - p[2] * 0.6) for p in pads])
+            rx, k6 = A.attr('rx', [num(p[2] * 0.65) for p in pads])
+            ry, k7 = A.attr('ry', [num(p[2] * 0.28) for p in pads])
             v, kv = A.attr('visibility', vis, discrete=True)
             return (f'<g{v}>{kv}<circle{cx}{cy}{r} fill="{INK}">{k1}{k2}{k3}</circle>'
                     f'<circle{cx}{cy}{r2} fill="{SKIN}">{k1}{k2}{k4}</circle>'
-                    f'<circle{cx}{ny}{rn} fill="{NAIL}">{k1}{k5}{k6}</circle></g>')
+                    f'<ellipse{cx}{ny}{rx}{ry} fill="{NAIL}" stroke="{SKIN_DARK}" stroke-width=".8">{k1}{k5}{k6}{k7}</ellipse></g>')
 
         holes = ''
         if all('hole' in h for h in hands):
             animated_path(f'{hid}-hole', [smooth_closed(h['hole']) for h in hands])
-            holes = use(f'{hid}-hole', f' fill="{INK}" fill-opacity=".22"')
+            holes = use(f'{hid}-hole', f' fill="{INK}" fill-opacity=".35"')
         crease_vis = ['visible' if h['palm_facing'] > 0.35 else 'hidden' for h in hands]
         draw.append('<g fill="none" stroke-linecap="round" stroke-linejoin="round">'
                     + ''.join(digit(n, 'back') for n in DIGITS)
@@ -787,9 +805,10 @@ def sign_svg(sid, sign, frames, frame=None, title=''):
             + body_svg() + ''.join(draw) + f'<g opacity=".95">{arrows}{marks}</g></svg>')
 
 
-def handshape_svg(sid, shape, ring=False, title=''):
+def handshape_svg(sid, shape, ring=False, title='', view=None):
     """The handshape alone, big, palm to the viewer, in the same style as the signs."""
-    pose = P((0, 0), shape, 'wrist', yaw=0, pitch=0, roll=0, scale=1.0, ring=ring)
+    v = view or {}
+    pose = P((0, 0), shape, 'wrist', yaw=v.get('yaw', 0), pitch=v.get('pitch', 0), roll=v.get('roll', 0), scale=1.0, ring=ring)
     sign = {'dur': 1.0, 'hands': ['right'], 'keys': [(0.0, [pose]), (1.0, [pose])], 'hand_only': True}
     frames = frames_for(sign)
     h = frames[0]['hands'][0]
@@ -848,7 +867,8 @@ def main(argv):
             (ROOT / 'media' / 'maos').mkdir(parents=True, exist_ok=True)
             (ROOT / 'media' / 'maos' / f'{sid}.svg').write_text(
                 handshape_svg(sid, sign['handshape'], sign.get('handshape_ring', False),
-                              f'Configuração de mão de {TITLES.get(sid, sid).replace("Sinal de ", "").replace(" em Libras", "")}'),
+                              f'Configuração de mão de {TITLES.get(sid, sid).replace("Sinal de ", "").replace(" em Libras", "")}',
+                              sign.get('handshape_view')),
                 encoding='utf-8')
         if sheet_dir:
             sheet_dir.mkdir(parents=True, exist_ok=True)
