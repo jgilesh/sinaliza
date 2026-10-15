@@ -1,6 +1,7 @@
 // UI. Typing shows the best match right away, big, with no extra tap (built for interpreters
 // who need a sign in the moment). The hash (#/sinal/<id>) holds a sign the user picked.
 import { buildIndex, search, highlightRange, normalize, sortSigns } from './search.js';
+import * as Frases from './frases.js';
 
 const ICONS = {
   hand: '<path d="M7 12V5.5a1.5 1.5 0 0 1 3 0V11M10 10.5V4a1.5 1.5 0 0 1 3 0v6.5M13 10.5V5a1.5 1.5 0 0 1 3 0v6M16 11V8a1.5 1.5 0 0 1 3 0v5.5a7.5 7.5 0 0 1-7.5 7.5h-.7a6 6 0 0 1-4.7-2.3L3.6 15.4a1.6 1.6 0 0 1 2.5-2L7 14.5"/>',
@@ -66,6 +67,8 @@ const state = {
   shownMedia: null,   // id of the sign whose drawing is in the page (so typing doesn't restart it)
   playMotion: false,  // reduced-motion users asked to see the movement
   category: null,     // category filter (id), null = all
+  wordClass: null,    // word-class filter (substantivo, verbo…), null = all
+  pageView: null,     // which page (frases / montar) is currently in #page
   topic: null,        // open topic inside a category
   recentTimer: 0,
 };
@@ -77,6 +80,8 @@ const els = {
   announce: $('#announce'),
   alts: $('#alts'),
   cats: $('#cats'),
+  classes: $('#classes'),
+  page: $('#page'),
   feature: $('#feature'),
   results: $('#results'),
   foot: $('#foot-note'),
@@ -127,6 +132,14 @@ async function load() {
   state.categories = new Map(data.categories.map(c => [c.id, c]));
   els.foot.innerHTML = footerHtml(data);
   buildCats();
+  buildClasses();
+  try {
+    const frases = await (await fetch('data/frases.json')).json();
+    Frases.setup({ esc, icon, thumb, signHref, signs: data.signs, classes: data.classes }, frases);
+    state.frasesReady = true;
+  } catch (err) {
+    console.warn('frases', err);
+  }
   const picked = pickedFromHash();
   if (picked) remember(picked);
   render();
@@ -145,12 +158,39 @@ const catStyle = sign => `--cat: ${catVar(categoryOf(sign).color ?? sign.categor
 
 // ---------- Rendering ----------
 
+function viewFromHash() {
+  if (location.hash.startsWith('#/frases')) return 'frases';
+  if (location.hash.startsWith('#/montar')) return 'montar';
+  return 'sinais';
+}
+
 function render() {
   if (!state.data) return;
   const query = els.q.value;
   const hasQuery = normalize(query).length > 0;
   els.clear.hidden = !query;
   els.searchbox.classList.toggle('has-text', Boolean(query));
+
+  const view = hasQuery ? 'sinais' : viewFromHash();
+  document.querySelectorAll('.tab').forEach(t => t.toggleAttribute('aria-current', t.dataset.view === view));
+  if (view !== 'sinais' && state.frasesReady) {
+    // Sentence pages replace the dictionary view.
+    for (const el of [els.cats, els.classes, els.alts, els.results]) el.hidden = true;
+    els.status.textContent = '';
+    els.feature.innerHTML = '';
+    state.shownMedia = null;
+    els.page.hidden = false;
+    if (state.pageView !== view) {
+      els.page.innerHTML = view === 'frases' ? Frases.frasesHtml() : Frases.montarHtml();
+      if (view === 'montar') Frases.wireMontar(els.page);
+      state.pageView = view;
+    }
+    document.title = `${view === 'frases' ? 'Frases' : 'Monte uma frase'} · Sinais`;
+    return;
+  }
+  els.page.hidden = true;
+  state.pageView = null;
+  els.results.hidden = false;
 
   // Search always covers every category; the chips only filter what is browsed.
   state.results = hasQuery ? search(state.index, query) : [];
@@ -163,6 +203,7 @@ function render() {
     : picked;
 
   updateCats(hasQuery);
+  updateClasses(hasQuery);
   renderStatus(query, hasQuery);
   const alts = altsHtml(query);
   els.alts.innerHTML = alts;
@@ -192,6 +233,20 @@ function buildCats() {
       ${icon(iconName)}${esc(name)} <span class="count">${count}<span class="sr-only"> ${count === 1 ? 'sinal' : 'sinais'}</span></span></button>`;
   els.cats.innerHTML = chip(null, 'Todas', 'grid', null, state.data.signs.length)
     + state.data.categories.map(c => chip(c.id, c.name, c.icon, c.color ?? c.id, counts.get(c.id) ?? 0)).join('');
+}
+
+function buildClasses() {
+  const counts = new Map();
+  for (const s of state.data.signs) counts.set(s.class, (counts.get(s.class) ?? 0) + 1);
+  els.classes.innerHTML = `<span class="classes-label">Classe:</span>`
+    + (state.data.classes ?? []).filter(c => counts.get(c.id)).map(c => `
+      <button class="cat-chip class-chip" type="button" data-class="${esc(c.id)}" aria-pressed="false" title="${esc(c.hint ?? '')}">
+        ${esc(c.name)} <span class="count">${counts.get(c.id)}<span class="sr-only"> sinais</span></span></button>`).join('');
+}
+
+function updateClasses(hasQuery) {
+  els.classes.querySelectorAll('.class-chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.class === state.wordClass)));
+  els.classes.hidden = hasQuery;
 }
 
 function updateCats(hasQuery) {
@@ -280,6 +335,15 @@ function featureMediaHtml(sign) {
     ${still ? `<button class="play" type="button" data-action="play">${icon('play')}Ver movimento</button>` : ''}`;
 }
 
+function refLine(sign) {
+  const r = sign.refs;
+  if (!r) return '';
+  const names = [];
+  if (r.signbank || /signbank/i.test(r.source ?? '')) names.push('Libras Signbank (UFSC)');
+  if (r.ines || /INES/.test(r.source ?? '')) names.push('INES');
+  return names.length ? `<p class="sign-ref">Referências: ${names.join(' · ')}</p>` : '';
+}
+
 function featureInfoHtml(sign, query) {
   const cat = categoryOf(sign);
   const match = state.results.find(r => r.sign === sign);
@@ -291,6 +355,7 @@ function featureInfoHtml(sign, query) {
       <h2 class="sign-word" tabindex="-1">${esc(sign.word)}</h2>
       <span class="cat-pill">${icon(topicOf(sign)?.icon ?? cat.icon)}${esc(topicOf(sign) ? `${cat.name} · ${topicOf(sign).name}` : cat.name)}</span>
     </div>
+    ${sign.class ? `<p class="class-line">${esc(state.data.classes?.find(c => c.id === sign.class)?.name.replace(/s$/, '').replace(/õe$/, 'ão') ?? sign.class)}</p>` : ''}
     ${viaAlias ? `<p class="sign-alias">Você buscou <b>${highlighted(match.term.text, query)}</b></p>`
       : aliases.length ? `<p class="sign-alias">Também: ${aliases.map(esc).join(', ')}</p>` : ''}
     <p class="sign-how">${esc(sign.how)}</p>
@@ -302,7 +367,7 @@ function featureInfoHtml(sign, query) {
           : esc(sign.params[key])}</dd></div>`).join('')}
     </dl>` : ''}
     ${sign.regionalNote ? `<p class="sign-note">${icon('info')}<span><b>Variação regional.</b> ${esc(sign.regionalNote)}</span></p>` : ''}
-    ${sign.refs ? `<p class="sign-ref">Referências: Libras Signbank (UFSC)${sign.refs.ines ? ' · INES' : ''}</p>` : ''}`;
+    ${refLine(sign)}`;
 }
 
 // Small picture of a sign: its still drawing, or a hand icon while the drawing is pending.
@@ -344,7 +409,21 @@ function emptyHtml(query) {
     </div>`;
 }
 
+function classListHtml() {
+  const cls = state.data.classes.find(c => c.id === state.wordClass);
+  const signs = state.sorted.filter(s => s.class === state.wordClass && inCategory(s));
+  return `<section class="cat-section">
+    <header class="cat-head" style="--cat: var(--brand)">
+      <span class="cat-ico">${icon('book')}</span>
+      <div><h2>${esc(cls?.name ?? '')}</h2>${cls?.hint ? `<p>${esc(cls.hint)}</p>` : ''}</div>
+      <span class="count">${plural(signs.length, 'sinal', 'sinais')}</span>
+    </header>
+    <ul class="words">${signs.map(wordRow).join('')}</ul>
+  </section>`;
+}
+
 function browseHtml() {
+  if (state.wordClass) return classListHtml();
   const recent = readRecent().map(id => state.byId.get(id)).filter(inCategory);
   // One section per category, each with its own color and icon.
   const sections = state.data.categories
@@ -440,6 +519,7 @@ function goHome() {
   els.q.value = '';
   state.category = null;
   state.topic = null;
+  state.wordClass = null;
   if (location.hash && location.hash !== '#/') history.replaceState(null, '', '#/');
   render();
   window.scrollTo({ top: 0 });
@@ -448,6 +528,7 @@ function goHome() {
 // ---------- Events ----------
 
 els.q.addEventListener('input', () => {
+  if (viewFromHash() !== 'sinais') history.replaceState(null, '', '#/');
   // A new search starts from its best match, not from a sign picked earlier.
   if (pickedFromHash()) history.replaceState(null, '', '#/');
   render();
@@ -473,6 +554,13 @@ $('.brand').addEventListener('click', e => {
   e.preventDefault();
   goHome();
 });
+els.classes.addEventListener('click', e => {
+  const chip = e.target.closest('.class-chip');
+  if (!chip) return;
+  state.wordClass = state.wordClass === chip.dataset.class ? null : chip.dataset.class;   // tap again to turn off
+  announce(state.wordClass ? chip.textContent.trim() : 'Todas as classes');
+  render();
+});
 els.cats.addEventListener('click', e => {
   const chip = e.target.closest('.cat-chip');
   if (!chip) return;
@@ -485,6 +573,12 @@ els.cats.addEventListener('click', e => {
   render();
 });
 document.addEventListener('click', e => {
+  // A tab always opens its page, even with a word still in the search box.
+  if (e.target.closest('.tab')) {
+    els.q.value = '';
+    if (e.target.closest('.tab').getAttribute('href') === location.hash) render();
+    return;
+  }
   const topic = e.target.closest('[data-topic]');
   if (topic) {
     state.topic = state.topic === topic.dataset.topic ? null : topic.dataset.topic;   // one open at a time

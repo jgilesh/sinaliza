@@ -38,7 +38,14 @@
 
   <main>
     <h1 class="sr-only">Dicionário de Libras</h1>
+    <nav class="tabs" aria-label="Seções">
+      <a class="tab" href="#/" data-view="sinais">Sinais</a>
+      <a class="tab" href="#/frases" data-view="frases">Frases</a>
+      <a class="tab" href="#/montar" data-view="montar">Monte uma frase</a>
+    </nav>
     <div id="cats" class="cats" role="group" aria-label="Categorias"></div>
+    <div id="classes" class="cats classes" role="group" aria-label="Classes de palavras"></div>
+    <section id="page" hidden></section>
     <p id="status" class="status" role="status" aria-live="polite"></p>
     <p id="announce" class="sr-only" aria-live="polite"></p>
     <nav id="alts" aria-label="Outros resultados" hidden></nav>

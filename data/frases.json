@@ -1,0 +1,470 @@
+{
+  "groups": [
+    {
+      "id": "apresentacao",
+      "name": "Apresentação",
+      "icon": "chat"
+    },
+    {
+      "id": "perguntas",
+      "name": "Perguntas",
+      "icon": "question"
+    },
+    {
+      "id": "dia",
+      "name": "Dia a dia",
+      "icon": "clock"
+    },
+    {
+      "id": "familia",
+      "name": "Família",
+      "icon": "people"
+    },
+    {
+      "id": "saude",
+      "name": "Sentimentos e saúde",
+      "icon": "heart"
+    }
+  ],
+  "tips": [
+    {
+      "id": "tempo",
+      "title": "O tempo vem primeiro",
+      "text": "Palavras de tempo (HOJE, AMANHÃ, ONTEM, DEPOIS) costumam abrir a frase. O verbo não muda: quem diz quando é a palavra de tempo."
+    },
+    {
+      "id": "pergunta",
+      "title": "Perguntas: palavra no fim e expressão no rosto",
+      "text": "O QUE, ONDE, QUANDO, QUEM e POR QUE costumam ir para o fim da frase, com as sobrancelhas franzidas. Em perguntas de sim ou não, as sobrancelhas sobem."
+    },
+    {
+      "id": "negacao",
+      "title": "Negação: NÃO e o balanço da cabeça",
+      "text": "O NÃO costuma vir depois do verbo ou no fim da frase, sempre com a cabeça balançando para os lados."
+    },
+    {
+      "id": "sem-ligacao",
+      "title": "Sem artigos e sem SER/ESTAR",
+      "text": "A Libras não usa artigos (o, a, um) e normalmente não usa ser/estar: EU CANSADO = eu estou cansado."
+    },
+    {
+      "id": "posse",
+      "title": "Posse depois do nome",
+      "text": "O possessivo costuma vir depois da pessoa ou coisa: MÃE MEU = minha mãe."
+    },
+    {
+      "id": "topico",
+      "title": "Assunto primeiro",
+      "text": "É comum começar pelo assunto da frase e depois comentar: FAMÍLIA MEU, EU GOSTAR MUITO."
+    },
+    {
+      "id": "datilologia",
+      "title": "Nomes próprios: datilologia",
+      "text": "Nomes de pessoas são soletrados letra por letra (A-N-A) até a pessoa receber um sinal próprio."
+    }
+  ],
+  "sentences": [
+    {
+      "id": "me-chamo",
+      "group": "apresentacao",
+      "pt": "Eu me chamo Ana.",
+      "gloss": [
+        "EU",
+        "NOME",
+        "A-N-A"
+      ],
+      "tips": [
+        "datilologia",
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "seu-nome",
+      "group": "apresentacao",
+      "pt": "Qual é o seu nome?",
+      "gloss": [
+        "VOCÊ",
+        "NOME",
+        "QUAL"
+      ],
+      "question": true,
+      "tips": [
+        "pergunta"
+      ]
+    },
+    {
+      "id": "sou-surdo",
+      "group": "apresentacao",
+      "pt": "Você é surdo?",
+      "gloss": [
+        "VOCÊ",
+        "SURDO"
+      ],
+      "question": true,
+      "tips": [
+        "pergunta",
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "sou-ouvinte",
+      "group": "apresentacao",
+      "pt": "Eu sou ouvinte.",
+      "gloss": [
+        "EU",
+        "OUVINTE"
+      ],
+      "tips": [
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "estudo-escola",
+      "group": "apresentacao",
+      "pt": "Eu estudo na escola.",
+      "gloss": [
+        "EU",
+        "ESTUDAR",
+        "ESCOLA"
+      ],
+      "tips": [
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "mora-onde",
+      "group": "perguntas",
+      "pt": "Onde você mora?",
+      "gloss": [
+        "VOCÊ",
+        "MORAR",
+        "ONDE"
+      ],
+      "question": true,
+      "tips": [
+        "pergunta"
+      ]
+    },
+    {
+      "id": "quer-o-que",
+      "group": "perguntas",
+      "pt": "O que você quer?",
+      "gloss": [
+        "VOCÊ",
+        "QUERER",
+        "O QUE"
+      ],
+      "question": true,
+      "tips": [
+        "pergunta"
+      ]
+    },
+    {
+      "id": "quem-ele",
+      "group": "perguntas",
+      "pt": "Quem é ele?",
+      "gloss": [
+        "ELE",
+        "QUEM"
+      ],
+      "question": true,
+      "tips": [
+        "pergunta",
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "chega-quando",
+      "group": "perguntas",
+      "pt": "Quando você chega?",
+      "gloss": [
+        "VOCÊ",
+        "CHEGAR",
+        "QUANDO"
+      ],
+      "question": true,
+      "tips": [
+        "pergunta"
+      ]
+    },
+    {
+      "id": "triste-por-que",
+      "group": "perguntas",
+      "pt": "Por que você está triste?",
+      "gloss": [
+        "VOCÊ",
+        "TRISTE",
+        "POR QUE"
+      ],
+      "question": true,
+      "tips": [
+        "pergunta",
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "banheiro-onde",
+      "group": "perguntas",
+      "pt": "Onde fica o banheiro?",
+      "gloss": [
+        "BANHEIRO",
+        "ONDE"
+      ],
+      "question": true,
+      "tips": [
+        "pergunta",
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "amanha-escola",
+      "group": "dia",
+      "pt": "Amanhã eu vou à escola.",
+      "gloss": [
+        "AMANHÃ",
+        "EU",
+        "IR",
+        "ESCOLA"
+      ],
+      "tips": [
+        "tempo",
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "ontem-trabalhar",
+      "group": "dia",
+      "pt": "Ontem eu trabalhei muito.",
+      "gloss": [
+        "ONTEM",
+        "EU",
+        "TRABALHAR",
+        "MUITO"
+      ],
+      "tips": [
+        "tempo"
+      ]
+    },
+    {
+      "id": "gosto-cafe",
+      "group": "dia",
+      "pt": "Eu gosto de café.",
+      "gloss": [
+        "EU",
+        "GOSTAR",
+        "CAFÉ"
+      ],
+      "tips": [
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "quero-agua",
+      "group": "dia",
+      "pt": "Eu quero beber água.",
+      "gloss": [
+        "EU",
+        "QUERER",
+        "BEBER",
+        "ÁGUA"
+      ],
+      "tips": []
+    },
+    {
+      "id": "comer-depois",
+      "group": "dia",
+      "pt": "Nós vamos comer depois.",
+      "gloss": [
+        "DEPOIS",
+        "NÓS",
+        "COMER"
+      ],
+      "tips": [
+        "tempo"
+      ]
+    },
+    {
+      "id": "nao-entendo",
+      "group": "dia",
+      "pt": "Eu não entendo.",
+      "gloss": [
+        "EU",
+        "ENTENDER",
+        "NÃO"
+      ],
+      "tips": [
+        "negacao"
+      ]
+    },
+    {
+      "id": "nao-sei",
+      "group": "dia",
+      "pt": "Desculpa, eu não sei.",
+      "gloss": [
+        "DESCULPAR",
+        "EU",
+        "SABER",
+        "NÃO"
+      ],
+      "tips": [
+        "negacao"
+      ]
+    },
+    {
+      "id": "preciso-ajuda",
+      "group": "dia",
+      "pt": "Eu preciso de ajuda.",
+      "gloss": [
+        "EU",
+        "PRECISAR",
+        "AJUDAR"
+      ],
+      "tips": [
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "comida-boa",
+      "group": "dia",
+      "pt": "A comida está boa.",
+      "gloss": [
+        "COMIDA",
+        "BOM"
+      ],
+      "tips": [
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "obrigado-amanha",
+      "group": "dia",
+      "pt": "Obrigado, até amanhã.",
+      "gloss": [
+        "OBRIGADO",
+        "ATÉ",
+        "AMANHÃ"
+      ],
+      "tips": []
+    },
+    {
+      "id": "mae-doente",
+      "group": "familia",
+      "pt": "Minha mãe está doente.",
+      "gloss": [
+        "MÃE",
+        "MEU",
+        "DOENTE"
+      ],
+      "tips": [
+        "posse",
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "pai-hospital",
+      "group": "familia",
+      "pt": "Meu pai trabalha no hospital.",
+      "gloss": [
+        "PAI",
+        "MEU",
+        "TRABALHAR",
+        "HOSPITAL"
+      ],
+      "tips": [
+        "posse",
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "dois-filhos",
+      "group": "familia",
+      "pt": "Eu tenho dois filhos.",
+      "gloss": [
+        "EU",
+        "TER",
+        "FILHO",
+        "DOIS"
+      ],
+      "tips": []
+    },
+    {
+      "id": "gosto-familia",
+      "group": "familia",
+      "pt": "Eu gosto muito da minha família.",
+      "gloss": [
+        "FAMÍLIA",
+        "MEU",
+        "EU",
+        "GOSTAR",
+        "MUITO"
+      ],
+      "tips": [
+        "topico",
+        "posse"
+      ]
+    },
+    {
+      "id": "ele-mora-perto",
+      "group": "familia",
+      "pt": "Ele mora perto.",
+      "gloss": [
+        "ELE",
+        "MORAR",
+        "PERTO"
+      ],
+      "tips": []
+    },
+    {
+      "id": "hoje-cansado",
+      "group": "saude",
+      "pt": "Hoje eu estou cansado.",
+      "gloss": [
+        "HOJE",
+        "EU",
+        "CANSADO"
+      ],
+      "tips": [
+        "tempo",
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "estou-feliz",
+      "group": "saude",
+      "pt": "Eu estou feliz.",
+      "gloss": [
+        "EU",
+        "FELIZ"
+      ],
+      "tips": [
+        "sem-ligacao"
+      ]
+    },
+    {
+      "id": "sinto-dor",
+      "group": "saude",
+      "pt": "Eu sinto dor.",
+      "gloss": [
+        "EU",
+        "SENTIR",
+        "DOR"
+      ],
+      "tips": []
+    },
+    {
+      "id": "medico-agora",
+      "group": "saude",
+      "pt": "Eu preciso de um médico agora.",
+      "gloss": [
+        "AGORA",
+        "EU",
+        "PRECISAR",
+        "MÉDICO"
+      ],
+      "tips": [
+        "tempo",
+        "sem-ligacao"
+      ]
+    }
+  ]
+}

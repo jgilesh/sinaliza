@@ -8,6 +8,13 @@ Status (15 Oct 2026): 1,151 signs. **Básico** has 1,150 (17 topics); 5 of them 
 
 John chose "words first, drawings later". Candidates = words in BOTH the UFSC Libras Signbank and the INES dictionary (1,363), ranked by Signbank corpus frequency. A workflow of 55 writer agents (25 words each: Signbank video frames + phonology fields + INES meaning → our own pt-BR entry) and 55 checker agents (≥8 entries per batch re-checked against the video; 570 fixes) produced the entries. Left out: non-basic/academic words, meaning mismatches, missing videos, and 27 low-confidence entries. Each entry has `refs` (`signbank` id, `ines` headword) and no `image`. Known gaps: some very common words (e.g. mãe, number words) are missing because one source lists them under another name; about 300 Signbank detail records didn't download.
 
+## Word classes and sentences (expert's idea, 15 Oct 2026)
+
+The expert (the Libras interpreter the app is for) wants people to *use* signs in sentences, not just know nouns. So:
+- Every sign has `class` (substantivo, verbo, adjetivo, adverbio, pronome, numeral, ligacao, expressao), mostly from the INES class labels; `data.classes` lists them and a "Classe" chip row filters browsing.
+- Tabs: **Sinais** (dictionary), **Frases** (`#/frases`: everyday sentences from `data/frases.json`, each in Portuguese + Libras gloss order + linked sign strip + grammar tips; grammar notes as closed single-open accordions) and **Monte uma frase** (`#/montar`: builder: QUANDO QUEM VERBO COMPLEMENTO + NÃO / question word at the end, with face cues). Code in `js/frases.js`; gloss tokens resolve to signs by word/alias, `A-N-A` = datilologia.
+- The expert reviews section by section later; for now this is the first version showing the idea. Videos/designs from her are on hold.
+
 ## Categories
 
 - John's plan: interpreters already know everyday signs, so the value is in advanced, specialised categories. **Básico** holds everyday signs; every other category is a specialised area (Tecnologia first; John will send more names and sections). Each category has its own color token (`--cat-<id>` in `css/app.css`), an icon (`ICONS` in `js/app.js`) and a one-line description in `data/sinais.json`.
