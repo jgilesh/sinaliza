@@ -2,12 +2,16 @@
 
 A Libras (Brazilian Sign Language) dictionary for an **interpreter** who needs a sign in the moment, on a phone or a computer. Type a Portuguese word (accents optional, typos tolerated) and the best match shows up big right away, with an animated drawing of the sign and its parameters. Personal project for John; not a Finances Demystified project, so the demystified brand does not apply.
 
-Status (13 Oct 2026): demo with 6 signs in two categories: **Básico** (água, café, família, obrigado, você) and **Tecnologia** (computador). Runs locally; not on GitHub yet.
+Status (15 Oct 2026): 1,151 signs. **Básico** has 1,150 (17 topics); 5 of them have drawings (água, café, família, obrigado, você), the rest are text entries ("Desenho em breve") waiting for drawings in checked batches. **Tecnologia** has computador (drawn). Runs locally; not on GitHub yet.
+
+## How the Básico words were made (15 Oct 2026)
+
+John chose "words first, drawings later". Candidates = words in BOTH the UFSC Libras Signbank and the INES dictionary (1,363), ranked by Signbank corpus frequency. A workflow of 55 writer agents (25 words each: Signbank video frames + phonology fields + INES meaning → our own pt-BR entry) and 55 checker agents (≥8 entries per batch re-checked against the video; 570 fixes) produced the entries. Left out: non-basic/academic words, meaning mismatches, missing videos, and 27 low-confidence entries. Each entry has `refs` (`signbank` id, `ines` headword) and no `image`. Known gaps: some very common words (e.g. mãe, number words) are missing because one source lists them under another name; about 300 Signbank detail records didn't download.
 
 ## Categories
 
 - John's plan: interpreters already know everyday signs, so the value is in advanced, specialised categories. **Básico** holds everyday signs; every other category is a specialised area (Tecnologia first; John will send more names and sections). Each category has its own color token (`--cat-<id>` in `css/app.css`), an icon (`ICONS` in `js/app.js`) and a one-line description in `data/sinais.json`.
-- Home shows one section per category; the chips above filter both browsing and search.
+- Home shows one section per category; Básico shows topic tiles (`categories[].topics`, sign `topic`) that open a word list. The chips filter browsing only: **search always covers every category** (John). Near-miss (typo) results only show when nothing real matches.
 
 ## Non-negotiables
 

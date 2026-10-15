@@ -20,6 +20,18 @@ const ICONS = {
   cup: '<path d="M5 9h12v4a6 6 0 0 1-12 0z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 3v3M11 3v3M14 3v3"/>',
   person: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
   laptop: '<rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/>',
+  heart: '<path d="M12 20s-7.5-4.6-9.3-9.4A4.9 4.9 0 0 1 12 6.4a4.9 4.9 0 0 1 9.3 4.2C19.5 15.4 12 20 12 20z"/>',
+  home: '<path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/>',
+  shirt: '<path d="M8 3 3 6l2 5 3-1v11h8V10l3 1 2-5-5-3a4 4 0 0 1-8 0z"/>',
+  palette: '<path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a4 4 0 0 0 4-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7" r="1"/>',
+  hash: '<path d="M5 9h14M5 15h14M10 4 8 20M16 4l-2 16"/>',
+  leaf: '<path d="M5 19c0-9 6-14 15-14 0 9-5 15-14 15"/><path d="M5 19 13 11"/>',
+  car: '<path d="M5 16V11l2-5h10l2 5v5M3 16h18v3H3zM7 19v1M17 19v1M5 11h14"/>',
+  book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19V5"/>',
+  smile: '<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0M9 9.5h.01M15 9.5h.01"/>',
+  run: '<circle cx="14" cy="4.5" r="2"/><path d="M6 21l4-6 3 2v5M8 11l3-4 4 3 3 1M11 7l-1 6"/>',
+  star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+  question: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17h.01"/>',
   tag: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/>',
 };
 
@@ -54,6 +66,7 @@ const state = {
   shownMedia: null,   // id of the sign whose drawing is in the page (so typing doesn't restart it)
   playMotion: false,  // reduced-motion users asked to see the movement
   category: null,     // category filter (id), null = all
+  topic: null,        // open topic inside a category
   recentTimer: 0,
 };
 
@@ -121,9 +134,9 @@ async function load() {
 }
 
 function footerHtml(data) {
-  const ref = data.reference;
-  return `${esc(data.title ?? 'Demo')} · ${plural(data.signs.length, 'sinal', 'sinais')} · Desenhos próprios`
-    + (ref ? `, com base no <a href="${esc(ref.url)}" target="_blank" rel="noopener">${esc(ref.name)}</a>` : '');
+  const refs = (data.references ?? []).map(r => `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a>`);
+  return `${plural(data.signs.length, 'sinal', 'sinais')} · Desenhos e descrições próprios`
+    + (refs.length ? `, com base em ${refs.join(' e ')}` : '');
 }
 
 const categoryOf = sign => state.categories.get(sign.category) ?? { id: 'outros', name: 'Outros', icon: 'tag', color: 'outros' };
@@ -139,13 +152,10 @@ function render() {
   els.clear.hidden = !query;
   els.searchbox.classList.toggle('has-text', Boolean(query));
 
-  const all = hasQuery ? search(state.index, query) : [];
-  const filtered = all.filter(r => inCategory(r.sign));
-  const realHit = list => list.some(r => r.kind !== 'typo');
-  // A typed lookup is never hidden by the category filter: if the word only exists in another
-  // category, show it anyway and say where it is.
-  state.outside = Boolean(state.category && hasQuery && !realHit(filtered) && realHit(all));
-  state.results = state.outside ? all : filtered;
+  // Search always covers every category; the chips only filter what is browsed.
+  state.results = hasQuery ? search(state.index, query) : [];
+  // With a big dictionary, near-misses ("cama" for "casa") only help when nothing real matches.
+  if (state.results.some(r => r.kind !== 'typo')) state.results = state.results.filter(r => r.kind !== 'typo');
   const picked = pickedFromHash();
   // The picked sign wins while it is still a match; otherwise the best match is shown.
   state.featured = hasQuery
@@ -186,8 +196,8 @@ function buildCats() {
 
 function updateCats(hasQuery) {
   els.cats.querySelectorAll('.cat-chip').forEach(b => b.setAttribute('aria-pressed', String((b.dataset.cat || null) === state.category)));
-  // While typing without a filter, the chips step aside so the sign stays above the keyboard.
-  els.cats.hidden = hasQuery && !state.category;
+  // While typing, the chips step aside so the sign stays above the keyboard (search is global).
+  els.cats.hidden = hasQuery;
 }
 
 function renderStatus(query, hasQuery) {
@@ -196,13 +206,9 @@ function renderStatus(query, hasQuery) {
     els.status.textContent = '';
     return;
   }
-  const where = state.category && !state.outside ? ` em <strong>${esc(state.categories.get(state.category)?.name)}</strong>` : '';
-  const q = `“<strong>${esc(query.trim())}</strong>”${where}`;
+  const q = `“<strong>${esc(query.trim())}</strong>”`;
   const n = state.results.length;
-  if (state.outside) {
-    const home = state.categories.get(state.results.find(r => r.kind !== 'typo').sign.category)?.name;
-    els.status.innerHTML = `“<strong>${esc(query.trim())}</strong>” está em <strong>${esc(home)}</strong>, fora do filtro ${esc(state.categories.get(state.category)?.name)}`;
-  } else if (!n) {
+  if (!n) {
     els.status.innerHTML = `Nenhum sinal para ${q}`;
   } else if (state.results.every(r => r.kind === 'typo')) {
     // Only near-misses: say clearly that this is not the word typed ("doce" is not "você").
@@ -235,7 +241,7 @@ function altsHtml(query) {
     ${shown.map(r => `
       <li><a class="alt" href="${signHref(r.sign)}" style="${catStyle(r.sign)}"
         ${r.sign === state.featured ? 'aria-current="true"' : ''}>
-        <img src="${esc(r.sign.poster ?? r.sign.image)}" alt="" loading="lazy">${highlighted(r.sign.word, query)}</a></li>`).join('')}
+        ${thumb(r.sign)}<span>${highlighted(r.sign.word, query)}</span></a></li>`).join('')}
   </ul>
   ${more > 0 ? `<p class="alt-more">+${more}: digite mais letras</p>` : ''}`;
 }
@@ -263,6 +269,10 @@ function renderFeature(query) {
 }
 
 function featureMediaHtml(sign) {
+  if (!sign.image) {
+    return `<div class="no-drawing">${icon('hand')}<p><strong>Desenho em breve</strong>
+      <span>Veja abaixo como fazer o sinal.</span></p></div>`;
+  }
   const still = reducedMotion.matches && !state.playMotion && sign.poster;
   return `
     <img src="${esc(still ? sign.poster : sign.image)}" decoding="async"
@@ -279,7 +289,7 @@ function featureInfoHtml(sign, query) {
   return `
     <div class="sign-head">
       <h2 class="sign-word" tabindex="-1">${esc(sign.word)}</h2>
-      <span class="cat-pill">${icon(cat.icon)}${esc(cat.name)}</span>
+      <span class="cat-pill">${icon(topicOf(sign)?.icon ?? cat.icon)}${esc(topicOf(sign) ? `${cat.name} · ${topicOf(sign).name}` : cat.name)}</span>
     </div>
     ${viaAlias ? `<p class="sign-alias">Você buscou <b>${highlighted(match.term.text, query)}</b></p>`
       : aliases.length ? `<p class="sign-alias">Também: ${aliases.map(esc).join(', ')}</p>` : ''}
@@ -291,7 +301,24 @@ function featureInfoHtml(sign, query) {
           ? `<span class="hs"><img src="${esc(sign.handshapeImage)}" alt="" loading="lazy"><span>${esc(sign.params[key])}</span></span>`
           : esc(sign.params[key])}</dd></div>`).join('')}
     </dl>` : ''}
-    ${sign.regionalNote ? `<p class="sign-note">${icon('info')}<span><b>Variação regional.</b> ${esc(sign.regionalNote)}</span></p>` : ''}`;
+    ${sign.regionalNote ? `<p class="sign-note">${icon('info')}<span><b>Variação regional.</b> ${esc(sign.regionalNote)}</span></p>` : ''}
+    ${sign.refs ? `<p class="sign-ref">Referências: Libras Signbank (UFSC)${sign.refs.ines ? ' · INES' : ''}</p>` : ''}`;
+}
+
+// Small picture of a sign: its still drawing, or a hand icon while the drawing is pending.
+function thumb(sign, cls = '') {
+  const src = sign.poster ?? sign.image;
+  return src
+    ? `<img class="${cls}" src="${esc(src)}" alt="" loading="lazy" decoding="async">`
+    : `<span class="thumb-none ${cls}" aria-hidden="true">${icon('hand')}</span>`;
+}
+
+const topicOf = sign => state.categories.get(sign.category)?.topics?.find(t => t.id === sign.topic);
+
+function wordRow(sign) {
+  return `<li><a class="word-row" href="${signHref(sign)}" style="${catStyle(sign)}">
+    ${thumb(sign)}<span class="wr-word">${esc(sign.word)}</span>
+    ${sign.image ? '' : '<span class="wr-note">desenho em breve</span>'}</a></li>`;
 }
 
 function cardHtml(sign, active) {
@@ -299,7 +326,7 @@ function cardHtml(sign, active) {
   return `
     <a class="card${active ? ' is-active' : ''}" href="${signHref(sign)}" style="${catStyle(sign)}"
       ${active ? 'aria-current="true"' : ''}>
-      <div class="card-media"><img src="${esc(sign.poster ?? sign.image)}" alt="" loading="lazy" decoding="async"></div>
+      <div class="card-media">${thumb(sign, 'card-img')}</div>
       <div class="card-body">
         <h3 class="card-word">${esc(sign.word)}</h3>
         <span class="card-cat">${icon(cat.icon)}${esc(cat.name)}</span>
@@ -312,7 +339,7 @@ function emptyHtml(query) {
     <div class="empty">
       <div class="empty-art">${icon('search')}</div>
       <h2>Ainda não temos “${esc(query.trim())}”</h2>
-      <p>Este demo tem só ${plural(state.data.signs.length, 'sinal', 'sinais')}. Confira a palavra ou veja todos.</p>
+      <p>O dicionário tem ${plural(state.data.signs.length, 'sinal', 'sinais')} por enquanto. Confira a palavra ou veja todos.</p>
       <button class="btn" type="button" data-action="show-all">${icon('grid')}Ver todos os sinais</button>
     </div>`;
 }
@@ -324,6 +351,19 @@ function browseHtml() {
     .filter(c => !state.category || c.id === state.category)
     .map(c => {
       const signs = state.sorted.filter(s => s.category === c.id);
+      const topics = (c.topics ?? []).map(t => ({ ...t, signs: signs.filter(s => s.topic === t.id) })).filter(t => t.signs.length);
+      const open = topics.find(t => t.id === state.topic);
+      const body = !topics.length
+        ? (signs.length ? `<div class="grid">${signs.map(s => cardHtml(s, s === state.featured)).join('')}</div>`
+          : '<p class="section-empty">Em breve.</p>')
+        : `<div class="topics">${topics.map(t => `
+            <button class="topic${t === open ? ' is-open' : ''}" type="button" data-topic="${esc(t.id)}" aria-expanded="${t === open}"
+              style="--cat: ${catVar(c.color ?? c.id)}">
+              <span class="topic-ico">${icon(t.icon)}</span><span class="topic-name">${esc(t.name)}</span>
+              <span class="topic-count">${t.signs.length}</span></button>`).join('')}</div>
+          ${open ? `<div class="topic-list" id="tema-${esc(open.id)}">
+            <h3>${icon(open.icon)}${esc(open.name)} <span class="count">${plural(open.signs.length, 'sinal', 'sinais')}</span></h3>
+            <ul class="words">${open.signs.map(wordRow).join('')}</ul></div>` : ''}`;
       return `
       <section class="cat-section" aria-labelledby="cat-${esc(c.id)}">
         <header class="cat-head" style="--cat: var(--cat-${esc(c.color ?? c.id)})">
@@ -331,8 +371,7 @@ function browseHtml() {
           <div><h2 id="cat-${esc(c.id)}">${esc(c.name)}</h2>${c.description ? `<p>${esc(c.description)}</p>` : ''}</div>
           <span class="count">${plural(signs.length, 'sinal', 'sinais')}</span>
         </header>
-        ${signs.length ? `<div class="grid">${signs.map(s => cardHtml(s, s === state.featured)).join('')}</div>`
-          : '<p class="section-empty">Em breve.</p>'}
+        ${body}
       </section>`;
     }).join('');
   return `
@@ -340,7 +379,7 @@ function browseHtml() {
     <h2 class="section-title">${icon('clock')}Recentes</h2>
     <div class="recent">
       ${recent.map(s => `<a class="recent-chip" href="${signHref(s)}" style="${catStyle(s)}">
-        <img src="${esc(s.poster ?? s.image)}" alt="" loading="lazy">${esc(s.word)}</a>`).join('')}
+        ${thumb(s)}${esc(s.word)}</a>`).join('')}
     </div>` : ''}
     ${sections}`;
 }
@@ -400,6 +439,7 @@ function clearSearch() {
 function goHome() {
   els.q.value = '';
   state.category = null;
+  state.topic = null;
   if (location.hash && location.hash !== '#/') history.replaceState(null, '', '#/');
   render();
   window.scrollTo({ top: 0 });
@@ -445,6 +485,13 @@ els.cats.addEventListener('click', e => {
   render();
 });
 document.addEventListener('click', e => {
+  const topic = e.target.closest('[data-topic]');
+  if (topic) {
+    state.topic = state.topic === topic.dataset.topic ? null : topic.dataset.topic;   // one open at a time
+    render();
+    if (state.topic) document.getElementById(`tema-${state.topic}`)?.scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+    return;
+  }
   const action = e.target.closest('[data-action]')?.dataset.action;
   if (action === 'show-all') goHome();
   if (action === 'play') {
