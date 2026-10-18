@@ -31,6 +31,7 @@ const ICONS = {
   book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19V5"/>',
   smile: '<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0M9 9.5h.01M15 9.5h.01"/>',
   run: '<circle cx="14" cy="4.5" r="2"/><path d="M6 21l4-6 3 2v5M8 11l3-4 4 3 3 1M11 7l-1 6"/>',
+  close: '<path d="M6 6l12 12M18 6 6 18"/>',
   star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
   question: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17h.01"/>',
   tag: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/>',
@@ -44,8 +45,7 @@ const PARAMS = [
   ['orientation', 'Palma', 'palm'],
   ['expression', 'Expressão', 'face'],
 ];
-const RECENT_KEY = 'sinais.recentes';
-const RECENT_MAX = 8;
+const FAV_KEY = 'sinaliza.favoritos';
 const ALTS_MAX = 8;
 const DEFAULT_TITLE = 'Sinaliza · Dicionário de Libras';
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -70,7 +70,7 @@ const state = {
   wordClass: null,    // word-class filter (substantivo, verbo…), null = all
   pageView: null,     // which page (frases / montar) is currently in #page
   topic: null,        // open topic inside a category
-  recentTimer: 0,
+  openCat: null,      // category whose accordion is open on the home screen
 };
 
 const els = {
@@ -90,19 +90,23 @@ const els = {
 
 // ---------- Storage (per device; the app works without it) ----------
 
-function readRecent() {
+// Favorites: signs the user saved to practise until they know them (newest first).
+function readFavs() {
   try {
-    const ids = JSON.parse(localStorage.getItem(RECENT_KEY) ?? '[]');
+    const ids = JSON.parse(localStorage.getItem(FAV_KEY) ?? '[]');
     return Array.isArray(ids) ? ids.filter(id => state.byId.has(id)) : [];
   } catch {
     return [];
   }
 }
 
-function remember(sign) {
-  if (!sign) return;
-  const ids = [sign.id, ...readRecent().filter(id => id !== sign.id)].slice(0, RECENT_MAX);
-  try { localStorage.setItem(RECENT_KEY, JSON.stringify(ids)); } catch { /* private mode: skip */ }
+const isFav = sign => readFavs().includes(sign.id);
+
+function toggleFav(sign) {
+  const ids = readFavs();
+  const next = ids.includes(sign.id) ? ids.filter(id => id !== sign.id) : [sign.id, ...ids];
+  try { localStorage.setItem(FAV_KEY, JSON.stringify(next)); } catch { /* private mode: skip */ }
+  return next.includes(sign.id);
 }
 
 // ---------- Data ----------
@@ -140,8 +144,6 @@ async function load() {
   } catch (err) {
     console.warn('frases', err);
   }
-  const picked = pickedFromHash();
-  if (picked) remember(picked);
   render();
   if (matchMedia('(hover: hover)').matches) els.q.focus();
 }
@@ -161,6 +163,7 @@ const catStyle = sign => `--cat: ${catVar(categoryOf(sign).color ?? sign.categor
 function viewFromHash() {
   if (location.hash.startsWith('#/frases')) return 'frases';
   if (location.hash.startsWith('#/montar')) return 'montar';
+  if (location.hash.startsWith('#/favoritos')) return 'favoritos';
   return 'sinais';
 }
 
@@ -173,6 +176,17 @@ function render() {
 
   const view = hasQuery ? 'sinais' : viewFromHash();
   document.querySelectorAll('.tab').forEach(t => t.toggleAttribute('aria-current', t.dataset.view === view));
+  if (view === 'favoritos') {
+    for (const el of [els.cats, els.classes, els.alts, els.results]) el.hidden = true;
+    els.status.textContent = '';
+    els.feature.innerHTML = '';
+    state.shownMedia = null;
+    els.page.hidden = false;
+    els.page.innerHTML = favsHtml();   // always rebuilt: the list changes as signs are saved
+    state.pageView = view;
+    document.title = 'Favoritos · Sinaliza';
+    return;
+  }
   if (view !== 'sinais' && state.frasesReady) {
     // Sentence pages replace the dictionary view.
     for (const el of [els.cats, els.classes, els.alts, els.results]) el.hidden = true;
@@ -212,13 +226,6 @@ function render() {
   els.results.setAttribute('aria-busy', 'false');
   els.results.innerHTML = hasQuery ? (state.results.length ? '' : emptyHtml(query)) : browseHtml();
   document.title = state.featured ? `${state.featured.word} em Libras · Sinaliza` : DEFAULT_TITLE;
-
-  clearTimeout(state.recentTimer);
-  if (hasQuery && state.featured) {
-    // Count a sign as "looked up" once the user stops typing on it for a moment.
-    const sign = state.featured;
-    state.recentTimer = setTimeout(() => remember(sign), 2500);
-  }
 }
 
 const inCategory = sign => !state.category || sign.category === state.category;
@@ -354,6 +361,7 @@ function featureInfoHtml(sign, query) {
     <div class="sign-head">
       <h2 class="sign-word" tabindex="-1">${esc(sign.word)}</h2>
       <span class="cat-pill">${icon(topicOf(sign)?.icon ?? cat.icon)}${esc(topicOf(sign) ? `${cat.name} · ${topicOf(sign).name}` : cat.name)}</span>
+      ${favButton(sign)}
     </div>
     ${sign.class ? `<p class="class-line">${esc(state.data.classes?.find(c => c.id === sign.class)?.name.replace(/s$/, '').replace(/õe$/, 'ão') ?? sign.class)}</p>` : ''}
     ${viaAlias ? `<p class="sign-alias">Você buscou <b>${highlighted(match.term.text, query)}</b></p>`
@@ -368,6 +376,31 @@ function featureInfoHtml(sign, query) {
     </dl>` : ''}
     ${sign.regionalNote ? `<p class="sign-note">${icon('info')}<span><b>Variação regional.</b> ${esc(sign.regionalNote)}</span></p>` : ''}
     ${refLine(sign)}`;
+}
+
+function favButton(sign) {
+  const on = isFav(sign);
+  return `<button class="fav${on ? ' is-on' : ''}" type="button" data-action="fav" aria-pressed="${on}"
+    title="${on ? 'Tirar dos favoritos' : 'Guardar nos favoritos para praticar'}">${icon('star')}<span>${on ? 'Nos favoritos' : 'Favoritar'}</span></button>`;
+}
+
+function favsHtml() {
+  const favs = readFavs().map(id => state.byId.get(id));
+  return `
+    <div class="page-intro">
+      <h1>Favoritos</h1>
+      <p>Guarde aqui os sinais que você ainda está aprendendo. Toque na estrela de um sinal para guardar ou tirar.</p>
+    </div>
+    ${favs.length ? `
+    <p class="fav-count">${plural(favs.length, 'sinal guardado', 'sinais guardados')}</p>
+    <ul class="words fav-list">${favs.map(s => `<li class="fav-row">${wordRow(s).replace(/^<li>|<\/li>$/g, '')}
+      <button class="fav-remove" type="button" data-action="unfav" data-id="${esc(s.id)}" aria-label="Tirar ${esc(s.word)} dos favoritos" title="Tirar dos favoritos">${icon('close')}</button></li>`).join('')}</ul>`
+    : `<div class="empty">
+        <div class="empty-art">${icon('star')}</div>
+        <h2>Nenhum favorito ainda</h2>
+        <p>Abra um sinal e toque em <b>Favoritar</b>. Ele fica guardado aqui até você tirar.</p>
+        <a class="btn" href="#/">${icon('search')}Buscar sinais</a>
+      </div>`}`;
 }
 
 // Small picture of a sign: its still drawing, or a hand icon while the drawing is pending.
@@ -424,14 +457,14 @@ function classListHtml() {
 
 function browseHtml() {
   if (state.wordClass) return classListHtml();
-  const recent = readRecent().map(id => state.byId.get(id)).filter(inCategory);
-  // One section per category, each with its own color and icon.
-  const sections = state.data.categories
+  // One closed accordion per category (one open at a time); its topics show only when it is opened.
+  return state.data.categories
     .filter(c => !state.category || c.id === state.category)
     .map(c => {
       const signs = state.sorted.filter(s => s.category === c.id);
       const topics = (c.topics ?? []).map(t => ({ ...t, signs: signs.filter(s => s.topic === t.id) })).filter(t => t.signs.length);
       const open = topics.find(t => t.id === state.topic);
+      const isOpen = state.openCat === c.id || state.category === c.id;
       const body = !topics.length
         ? (signs.length ? `<div class="grid">${signs.map(s => cardHtml(s, s === state.featured)).join('')}</div>`
           : '<p class="section-empty">Em breve.</p>')
@@ -444,23 +477,16 @@ function browseHtml() {
             <h3>${icon(open.icon)}${esc(open.name)} <span class="count">${plural(open.signs.length, 'sinal', 'sinais')}</span></h3>
             <ul class="words">${open.signs.map(wordRow).join('')}</ul></div>` : ''}`;
       return `
-      <section class="cat-section" aria-labelledby="cat-${esc(c.id)}">
-        <header class="cat-head" style="--cat: var(--cat-${esc(c.color ?? c.id)})">
+      <details class="cat-section" name="categorias" data-cat-acc="${esc(c.id)}"${isOpen ? ' open' : ''}>
+        <summary class="cat-head" style="--cat: var(--cat-${esc(c.color ?? c.id)})">
           <span class="cat-ico">${icon(c.icon)}</span>
-          <div><h2 id="cat-${esc(c.id)}">${esc(c.name)}</h2>${c.description ? `<p>${esc(c.description)}</p>` : ''}</div>
+          <div><h2>${esc(c.name)}</h2>${c.description ? `<p>${esc(c.description)}</p>` : ''}</div>
           <span class="count">${plural(signs.length, 'sinal', 'sinais')}</span>
-        </header>
-        ${body}
-      </section>`;
+          <span class="acc-tri" aria-hidden="true"></span>
+        </summary>
+        <div class="cat-body">${body}</div>
+      </details>`;
     }).join('');
-  return `
-    ${recent.length ? `
-    <h2 class="section-title">${icon('clock')}Recentes</h2>
-    <div class="recent">
-      ${recent.map(s => `<a class="recent-chip" href="${signHref(s)}" style="${catStyle(s)}">
-        ${thumb(s)}${esc(s.word)}</a>`).join('')}
-    </div>` : ''}
-    ${sections}`;
 }
 
 // ---------- Selection (hash) ----------
@@ -483,7 +509,6 @@ function announce(text) {
 
 function onHashChange() {
   const picked = pickedFromHash();
-  if (picked) remember(picked);
   if (picked && !inCategory(picked)) state.category = null;
   // A link to a sign that the current search doesn't include: show the sign, drop the search.
   if (picked && normalize(els.q.value) && !search(state.index, els.q.value).some(r => r.sign === picked)) {
@@ -519,6 +544,7 @@ function goHome() {
   els.q.value = '';
   state.category = null;
   state.topic = null;
+  state.openCat = null;
   state.wordClass = null;
   if (location.hash && location.hash !== '#/') history.replaceState(null, '', '#/');
   render();
@@ -541,7 +567,6 @@ els.q.addEventListener('keydown', e => {
   }
   if (e.key === 'Enter') {
     e.preventDefault();
-    remember(state.featured);
     els.q.blur(); // closes the phone keyboard so the whole sign is visible
   }
   if (e.key === 'Escape' && els.q.value) clearSearch();
@@ -586,8 +611,21 @@ document.addEventListener('click', e => {
     if (state.topic) document.getElementById(`tema-${state.topic}`)?.scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'auto' : 'smooth' });
     return;
   }
-  const action = e.target.closest('[data-action]')?.dataset.action;
+  const actionEl = e.target.closest('[data-action]');
+  const action = actionEl?.dataset.action;
   if (action === 'show-all') goHome();
+  if (action === 'fav' && state.featured) {
+    const on = toggleFav(state.featured);
+    actionEl.outerHTML = favButton(state.featured);
+    announce(on ? `${state.featured.word} guardado nos favoritos` : `${state.featured.word} tirado dos favoritos`);
+    $('.fav', els.feature)?.focus();
+  }
+  if (action === 'unfav') {
+    const sign = state.byId.get(actionEl.dataset.id);
+    if (sign && isFav(sign)) toggleFav(sign);
+    render();
+    announce(`${sign?.word ?? 'Sinal'} tirado dos favoritos`);
+  }
   if (action === 'play') {
     state.playMotion = true;
     const media = $('.sign-media', els.feature);
@@ -602,6 +640,13 @@ document.addEventListener('keydown', e => {
     els.q.select();
   }
 });
+// Remember which category accordion is open, so re-rendering keeps it (toggle doesn't bubble).
+document.addEventListener('toggle', e => {
+  const acc = e.target.closest?.('[data-cat-acc]');
+  if (!acc || e.target !== acc) return;
+  if (acc.open) state.openCat = acc.dataset.catAcc;
+  else if (state.openCat === acc.dataset.catAcc) { state.openCat = null; state.topic = null; }
+}, true);
 window.addEventListener('hashchange', onHashChange);
 reducedMotion.addEventListener?.('change', () => { state.shownMedia = null; render(); });
 
