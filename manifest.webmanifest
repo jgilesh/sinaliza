@@ -1,6 +1,6 @@
 {
-  "name": "Sinais · Dicionário de Libras",
-  "short_name": "Sinais",
+  "name": "Sinaliza · Dicionário de Libras",
+  "short_name": "Sinaliza",
   "description": "Digite uma palavra e veja o sinal em Libras.",
   "lang": "pt-BR",
   "start_url": "./",

@@ -47,7 +47,7 @@ const PARAMS = [
 const RECENT_KEY = 'sinais.recentes';
 const RECENT_MAX = 8;
 const ALTS_MAX = 8;
-const DEFAULT_TITLE = 'Sinais · Dicionário de Libras';
+const DEFAULT_TITLE = 'Sinaliza · Dicionário de Libras';
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -185,7 +185,7 @@ function render() {
       if (view === 'montar') Frases.wireMontar(els.page);
       state.pageView = view;
     }
-    document.title = `${view === 'frases' ? 'Frases' : 'Monte uma frase'} · Sinais`;
+    document.title = `${view === 'frases' ? 'Frases' : 'Monte uma frase'} · Sinaliza`;
     return;
   }
   els.page.hidden = true;
@@ -211,7 +211,7 @@ function render() {
   renderFeature(query);
   els.results.setAttribute('aria-busy', 'false');
   els.results.innerHTML = hasQuery ? (state.results.length ? '' : emptyHtml(query)) : browseHtml();
-  document.title = state.featured ? `${state.featured.word} em Libras · Sinais` : DEFAULT_TITLE;
+  document.title = state.featured ? `${state.featured.word} em Libras · Sinaliza` : DEFAULT_TITLE;
 
   clearTimeout(state.recentTimer);
   if (hasQuery && state.featured) {

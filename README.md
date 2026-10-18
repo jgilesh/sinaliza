@@ -1,4 +1,4 @@
-# Sinais · Dicionário de Libras
+# Sinaliza · Dicionário de Libras
 
 Dicionário de Libras para consulta rápida, no celular ou no computador. Digite uma palavra em português (sem precisar de acento) e o sinal aparece na hora, com um desenho animado e os parâmetros: mão, local, movimento, palma e expressão.
 
