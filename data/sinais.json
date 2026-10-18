@@ -1,5 +1,5 @@
 {
-  "title": "Sinais",
+  "title": "Sinaliza",
   "categories": [
     {
       "id": "basico",
@@ -258,7 +258,10 @@
         "signbank": 2722,
         "ines": "SURDO1"
       },
-      "class": "adjetivo"
+      "class": "adjetivo",
+      "image": "media/sinais/surdo.svg",
+      "poster": "media/sinais/surdo-parado.svg",
+      "handshapeImage": "media/maos/surdo.svg"
     },
     {
       "id": "nao",
@@ -279,7 +282,10 @@
         "signbank": 1957,
         "ines": "NÃO1"
       },
-      "class": "adverbio"
+      "class": "adverbio",
+      "image": "media/sinais/nao.svg",
+      "poster": "media/sinais/nao-parado.svg",
+      "handshapeImage": "media/maos/nao.svg"
     },
     {
       "id": "esperar",
@@ -338,7 +344,7 @@
         "handshape": "L: polegar e indicador estendidos, demais dedos fechados",
         "location": "Parte alta do peito, abaixo do pescoço (o polegar toca)",
         "movement": "Toca o peito com pequenas batidas, 2 vezes",
-        "orientation": "Palma para baixo/para o corpo, indicador para o lado oposto",
+        "orientation": "Palma para baixo, polegar voltado para o peito, indicador apontando para o lado oposto e levemente para cima",
         "expression": "Neutra"
       },
       "hands": 1,
@@ -346,7 +352,10 @@
         "signbank": 2784,
         "ines": "TER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/ter.svg",
+      "poster": "media/sinais/ter-parado.svg",
+      "handshapeImage": "media/maos/ter.svg"
     },
     {
       "id": "ver",
@@ -416,7 +425,10 @@
         "signbank": 1157,
         "ines": "ESTUDAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/estudar.svg",
+      "poster": "media/sinais/estudar-parado.svg",
+      "handshapeImage": "media/maos/estudar.svg"
     },
     {
       "id": "porque",
@@ -482,7 +494,10 @@
         "signbank": 1103,
         "ines": "ESCOLA"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/escola.svg",
+      "poster": "media/sinais/escola-parado.svg",
+      "handshapeImage": "media/maos/escola.svg"
     },
     {
       "id": "precisar",
@@ -506,7 +521,10 @@
         "signbank": 2311,
         "ines": "PRECISAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/precisar.svg",
+      "poster": "media/sinais/precisar-parado.svg",
+      "handshapeImage": "media/maos/precisar.svg"
     },
     {
       "id": "mas",
@@ -584,12 +602,12 @@
       ],
       "category": "basico",
       "topic": "tempo",
-      "how": "Mão em L com o indicador para cima e a palma para a frente, à altura do ombro. O pulso gira e a mão desce em arco para a frente, terminando com o indicador apontando para baixo.",
+      "how": "Mão em L com o indicador para cima e a palma para a frente, ao lado da cabeça. O pulso dobra e a mão vai em arco para a frente, terminando com o indicador apontando para a frente e um pouco para baixo.",
       "params": {
         "handshape": "L: polegar e indicador estendidos, demais dedos fechados",
-        "location": "Espaço neutro, à frente do ombro",
+        "location": "Ao lado da cabeça, à altura do rosto",
         "movement": "Arco para a frente e para baixo com giro do pulso, uma vez",
-        "orientation": "Começa com palma para a frente; termina com palma para baixo/para o corpo",
+        "orientation": "Começa com palma para a frente; termina com palma para baixo, indicador para a frente",
         "expression": "Neutra"
       },
       "hands": 1,
@@ -597,7 +615,10 @@
         "signbank": 855,
         "ines": "DEPOIS"
       },
-      "class": "adverbio"
+      "class": "adverbio",
+      "image": "media/sinais/depois.svg",
+      "poster": "media/sinais/depois-parado.svg",
+      "handshapeImage": "media/maos/depois.svg"
     },
     {
       "id": "professor",
@@ -665,7 +686,10 @@
         "signbank": 2610,
         "ines": "SENTIR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/sentir.svg",
+      "poster": "media/sinais/sentir-parado.svg",
+      "handshapeImage": "media/maos/sentir.svg"
     },
     {
       "id": "ensinar",
@@ -824,7 +848,10 @@
         "signbank": 2831,
         "ines": "TRABALHAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/trabalhar.svg",
+      "poster": "media/sinais/trabalhar-parado.svg",
+      "handshapeImage": "media/maos/trabalhar.svg"
     },
     {
       "id": "igual",
@@ -870,7 +897,10 @@
         "signbank": 3201,
         "ines": "MEU1"
       },
-      "class": "pronome"
+      "class": "pronome",
+      "image": "media/sinais/meu.svg",
+      "poster": "media/sinais/meu-parado.svg",
+      "handshapeImage": "media/maos/meu.svg"
     },
     {
       "id": "hoje",
@@ -893,7 +923,10 @@
         "signbank": 1458,
         "ines": "HOJE1"
       },
-      "class": "adverbio"
+      "class": "adverbio",
+      "image": "media/sinais/hoje.svg",
+      "poster": "media/sinais/hoje-parado.svg",
+      "handshapeImage": "media/maos/hoje.svg"
     },
     {
       "id": "por-causa",
@@ -1050,7 +1083,10 @@
         "signbank": 2078,
         "ines": "OUVINTE"
       },
-      "class": "adjetivo"
+      "class": "adjetivo",
+      "image": "media/sinais/ouvinte.svg",
+      "poster": "media/sinais/ouvinte-parado.svg",
+      "handshapeImage": "media/maos/ouvinte.svg"
     },
     {
       "id": "acabar",
@@ -1218,7 +1254,7 @@
         "handshape": "B: mão aberta, dedos unidos e esticados (as duas mãos)",
         "location": "Mão de apoio (a base da dominante toca o lado do indicador da mão de apoio)",
         "movement": "As duas mãos avançam juntas, uma vez; a direção pode mudar para indicar quem ajuda quem",
-        "orientation": "Apoio com a palma para cima; dominante com a palma para o lado contrário e os dedos para cima",
+        "orientation": "Apoio com a palma para cima; dominante com a palma para a frente e os dedos para cima",
         "expression": "Neutra"
       },
       "hands": 2,
@@ -1226,7 +1262,10 @@
         "signbank": 90,
         "ines": "AJUDAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/ajudar.svg",
+      "poster": "media/sinais/ajudar-parado.svg",
+      "handshapeImage": "media/maos/ajudar.svg"
     },
     {
       "id": "certo",
@@ -1430,7 +1469,10 @@
         "signbank": 545,
         "ines": "CASA"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/casa.svg",
+      "poster": "media/sinais/casa-parado.svg",
+      "handshapeImage": "media/maos/casa.svg"
     },
     {
       "id": "ate",
@@ -1451,7 +1493,10 @@
         "signbank": 248,
         "ines": "ATÉ"
       },
-      "class": "ligacao"
+      "class": "ligacao",
+      "image": "media/sinais/ate.svg",
+      "poster": "media/sinais/ate-parado.svg",
+      "handshapeImage": "media/maos/ate.svg"
     },
     {
       "id": "outro",
@@ -1561,7 +1606,10 @@
         "signbank": 3173,
         "ines": "IR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/ir.svg",
+      "poster": "media/sinais/ir-parado.svg",
+      "handshapeImage": "media/maos/ir.svg"
     },
     {
       "id": "nada",
@@ -1608,7 +1656,10 @@
         "signbank": 389,
         "ines": "BOM1"
       },
-      "class": "adjetivo"
+      "class": "adjetivo",
+      "image": "media/sinais/bom.svg",
+      "poster": "media/sinais/bom-parado.svg",
+      "handshapeImage": "media/maos/bom.svg"
     },
     {
       "id": "faltar",
@@ -1744,7 +1795,10 @@
         "signbank": 1094,
         "ines": "ENTENDER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/entender.svg",
+      "poster": "media/sinais/entender-parado.svg",
+      "handshapeImage": "media/maos/entender.svg"
     },
     {
       "id": "conhecer",
@@ -1857,7 +1911,10 @@
         "signbank": 2403,
         "ines": "QUERER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/querer.svg",
+      "poster": "media/sinais/querer-parado.svg",
+      "handshapeImage": "media/maos/querer.svg"
     },
     {
       "id": "perguntar",
@@ -2320,7 +2377,10 @@
         "signbank": 2053,
         "ines": "ONDE"
       },
-      "class": "adverbio"
+      "class": "adverbio",
+      "image": "media/sinais/onde.svg",
+      "poster": "media/sinais/onde-parado.svg",
+      "handshapeImage": "media/maos/onde.svg"
     },
     {
       "id": "nome",
@@ -2341,7 +2401,10 @@
         "signbank": 1990,
         "ines": "NOME"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/nome.svg",
+      "poster": "media/sinais/nome-parado.svg",
+      "handshapeImage": "media/maos/nome.svg"
     },
     {
       "id": "sozinho",
@@ -2500,7 +2563,10 @@
         "signbank": 1403,
         "ines": "GOSTAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/gostar.svg",
+      "poster": "media/sinais/gostar-parado.svg",
+      "handshapeImage": "media/maos/gostar.svg"
     },
     {
       "id": "nascer",
@@ -2764,7 +2830,10 @@
         "signbank": 1823,
         "ines": "MÉDICO"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/medico.svg",
+      "poster": "media/sinais/medico-parado.svg",
+      "handshapeImage": "media/maos/medico.svg"
     },
     {
       "id": "unir",
@@ -2902,7 +2971,11 @@
         "signbank": 1238,
         "ines": "FILHO"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/filho.svg",
+      "poster": "media/sinais/filho-parado.svg",
+      "handshapeImage": "media/maos/filho.svg",
+      "regionalNote": "No dicionário do INES, a mão se fecha sobre o peito, sem se afastar."
     },
     {
       "id": "varios",
@@ -3757,7 +3830,10 @@
         "signbank": 871,
         "ines": "DESCULPAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/desculpar.svg",
+      "poster": "media/sinais/desculpar-parado.svg",
+      "handshapeImage": "media/maos/desculpar.svg"
     },
     {
       "id": "livro",
@@ -3846,7 +3922,10 @@
         "signbank": 1221,
         "ines": "FELIZ1"
       },
-      "class": "adjetivo"
+      "class": "adjetivo",
+      "image": "media/sinais/feliz.svg",
+      "poster": "media/sinais/feliz-parado.svg",
+      "handshapeImage": "media/maos/feliz.svg"
     },
     {
       "id": "procurar",
@@ -4152,7 +4231,10 @@
         "signbank": 604,
         "ines": "CHEGAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/chegar.svg",
+      "poster": "media/sinais/chegar-parado.svg",
+      "handshapeImage": "media/maos/chegar.svg"
     },
     {
       "id": "espalhar",
@@ -4529,9 +4611,12 @@
       "hands": 1,
       "refs": {
         "signbank": 2098,
-        "ines": "PAI1"
+        "ines": "PAI2"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/pai.svg",
+      "poster": "media/sinais/pai-parado.svg",
+      "handshapeImage": "media/maos/pai.svg"
     },
     {
       "id": "modelo",
@@ -4648,10 +4733,10 @@
       "topic": "corpo",
       "how": "Mão de apoio com a palma para baixo diante do peito. A mão dominante, aberta, pousa por cima do dorso dela, cruzada, e fica ali.",
       "params": {
-        "handshape": "Dominante aberta com dedos separados; mão de apoio fechada ou aberta com a palma para baixo",
+        "handshape": "Dominante aberta; mão de apoio aberta, dobrada no pulso, com os dedos para baixo",
         "location": "Diante do peito, sobre o dorso da mão de apoio",
         "movement": "Mão dominante desce e encosta no dorso de apoio, uma vez",
-        "orientation": "Palmas das duas mãos para baixo",
+        "orientation": "Mão de apoio com o dorso para a frente; dominante com a palma para baixo, cruzada sobre o dorso dela",
         "expression": "Triste, cantos da boca para baixo"
       },
       "hands": 2,
@@ -4659,7 +4744,10 @@
         "signbank": 944,
         "ines": "DOENTE1"
       },
-      "class": "adjetivo"
+      "class": "adjetivo",
+      "image": "media/sinais/doente.svg",
+      "poster": "media/sinais/doente-parado.svg",
+      "handshapeImage": "media/maos/doente.svg"
     },
     {
       "id": "seguir",
@@ -5344,7 +5432,10 @@
         "signbank": 2684,
         "ines": "SORTE"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/sorte.svg",
+      "poster": "media/sinais/sorte-parado.svg",
+      "handshapeImage": "media/maos/sorte.svg"
     },
     {
       "id": "ficar",
@@ -5565,7 +5656,10 @@
         "signbank": 690,
         "ines": "COMER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/comer.svg",
+      "poster": "media/sinais/comer-parado.svg",
+      "handshapeImage": "media/maos/comer.svg"
     },
     {
       "id": "comunidade",
@@ -6304,7 +6398,10 @@
         "signbank": 1473,
         "ines": "HOSPITAL"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/hospital.svg",
+      "poster": "media/sinais/hospital-parado.svg",
+      "handshapeImage": "media/maos/hospital.svg"
     },
     {
       "id": "mesa",
@@ -6346,7 +6443,11 @@
         "signbank": 1020,
         "ines": "POR FAVOR"
       },
-      "class": "adverbio"
+      "class": "adverbio",
+      "image": "media/sinais/por-favor.svg",
+      "poster": "media/sinais/por-favor-parado.svg",
+      "handshapeImage": "media/maos/por-favor.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: a mão dominante horizontal, com as pontas dos dedos encostadas na palma da outra mão, em pé."
     },
     {
       "id": "profundo",
@@ -6522,8 +6623,8 @@
       "params": {
         "handshape": "A: mão fechada com o polegar esticado para cima (nas duas mãos)",
         "location": "Espaço neutro, à frente do peito",
-        "movement": "Mãos se aproximam uma da outra até quase se tocar; uma vez",
-        "orientation": "Palmas voltadas uma para a outra, polegares para cima",
+        "movement": "Mãos se aproximam até quase se tocar; repete com um movimento curto (2 vezes)",
+        "orientation": "Palmas para a frente e um pouco uma para a outra, polegares para cima, lado do polegar de uma mão voltado para a outra",
         "expression": "Neutra"
       },
       "hands": 2,
@@ -6531,7 +6632,10 @@
         "signbank": 2217,
         "ines": "PERTO1"
       },
-      "class": "adverbio"
+      "class": "adverbio",
+      "image": "media/sinais/perto.svg",
+      "poster": "media/sinais/perto-parado.svg",
+      "handshapeImage": "media/maos/perto.svg"
     },
     {
       "id": "desistir",
@@ -7552,7 +7656,10 @@
         "signbank": 2760,
         "ines": "TCHAU"
       },
-      "class": "expressao"
+      "class": "expressao",
+      "image": "media/sinais/tchau.svg",
+      "poster": "media/sinais/tchau-parado.svg",
+      "handshapeImage": "media/maos/tchau.svg"
     },
     {
       "id": "afinidade",
@@ -8038,7 +8145,10 @@
         "signbank": 1031,
         "ines": "SILÊNCIO"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/silencio.svg",
+      "poster": "media/sinais/silencio-parado.svg",
+      "handshapeImage": "media/maos/silencio.svg"
     },
     {
       "id": "todo",
@@ -8526,7 +8636,10 @@
         "signbank": 2521,
         "ines": "SABER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/saber.svg",
+      "poster": "media/sinais/saber-parado.svg",
+      "handshapeImage": "media/maos/saber.svg"
     },
     {
       "id": "vocabulario",
@@ -9093,7 +9206,10 @@
         "signbank": 1321,
         "ines": "OK"
       },
-      "class": "expressao"
+      "class": "expressao",
+      "image": "media/sinais/ok.svg",
+      "poster": "media/sinais/ok-parado.svg",
+      "handshapeImage": "media/maos/ok.svg"
     },
     {
       "id": "padrao",
@@ -9504,7 +9620,10 @@
         "signbank": 499,
         "ines": "CANSAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/cansado.svg",
+      "poster": "media/sinais/cansado-parado.svg",
+      "handshapeImage": "media/maos/cansado.svg"
     },
     {
       "id": "demitir",
@@ -9679,7 +9798,10 @@
         "signbank": 281,
         "ines": "AZAR"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/azar.svg",
+      "poster": "media/sinais/azar-parado.svg",
+      "handshapeImage": "media/maos/azar.svg"
     },
     {
       "id": "brilhar",
@@ -9744,7 +9866,10 @@
         "signbank": 804,
         "ines": "CUIDADO"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/cuidado.svg",
+      "poster": "media/sinais/cuidado-parado.svg",
+      "handshapeImage": "media/maos/cuidado.svg"
     },
     {
       "id": "leve",
@@ -10825,7 +10950,11 @@
         "signbank": 2024,
         "ines": "OBA1"
       },
-      "class": "expressao"
+      "class": "expressao",
+      "image": "media/sinais/oba.svg",
+      "poster": "media/sinais/oba-parado.svg",
+      "handshapeImage": "media/maos/oba.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma, feita com uma mão só."
     },
     {
       "id": "papagaio",
@@ -11025,7 +11154,7 @@
       "params": {
         "handshape": "B nas duas mãos, dedos unidos e polegar levantado",
         "location": "À frente do peito; as pontas dos dedos da dominante tocam a mão de apoio",
-        "movement": "A dominante desliza, mantendo o contato, para trás em direção ao corpo, uma vez",
+        "movement": "As duas mãos, com as pontas dos dedos encostadas, recuam juntas em direção ao peito e sobem um pouco, uma vez",
         "orientation": "Palmas viradas para o corpo, dedos na horizontal",
         "expression": "Cortês, com leve inclinação de cabeça e corpo"
       },
@@ -11034,7 +11163,10 @@
         "signbank": 684,
         "ines": "COM LICENÇA"
       },
-      "class": "expressao"
+      "class": "expressao",
+      "image": "media/sinais/com-licenca.svg",
+      "poster": "media/sinais/com-licenca-parado.svg",
+      "handshapeImage": "media/maos/com-licenca.svg"
     },
     {
       "id": "direto",
@@ -11350,7 +11482,10 @@
         "signbank": 80,
         "ines": "AGRADECER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/agradecer.svg",
+      "poster": "media/sinais/agradecer-parado.svg",
+      "handshapeImage": "media/maos/agradecer.svg"
     },
     {
       "id": "alertar",
@@ -11838,7 +11973,7 @@
         "handshape": "Dominante em 'chifres': indicador e mínimo estendidos, demais dedos fechados; mão de apoio fechada (S)",
         "location": "Sobre o antebraço da mão de apoio, à frente do tronco",
         "movement": "Mão dominante desce e toca o antebraço, sobe um pouco e toca de novo (2 toques)",
-        "orientation": "Palma da dominante para baixo, dedos apontando para o cotovelo; dorso da mão de apoio para cima",
+        "orientation": "Palma da dominante para baixo, dedos sobre o antebraço; dorso da mão de apoio para cima",
         "expression": "Neutra"
       },
       "hands": 2,
@@ -11846,7 +11981,10 @@
         "signbank": 312,
         "ines": "BANHEIRO"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/banheiro.svg",
+      "poster": "media/sinais/banheiro-parado.svg",
+      "handshapeImage": "media/maos/banheiro.svg"
     },
     {
       "id": "castigar",
@@ -12671,7 +12809,10 @@
         "signbank": 2042,
         "ines": "OI"
       },
-      "class": "expressao"
+      "class": "expressao",
+      "image": "media/sinais/oi.svg",
+      "poster": "media/sinais/oi-parado.svg",
+      "handshapeImage": "media/maos/oi.svg"
     },
     {
       "id": "passagem",
@@ -13767,7 +13908,10 @@
         "signbank": 950,
         "ines": "DOR"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/dor.svg",
+      "poster": "media/sinais/dor-parado.svg",
+      "handshapeImage": "media/maos/dor.svg"
     },
     {
       "id": "egoista",
@@ -15334,7 +15478,7 @@
       "aliases": [],
       "category": "basico",
       "topic": "tempo",
-      "how": "Mão em L com a ponta do polegar apoiada na bochecha. O indicador dobra para trás e volta a esticar, repetindo.",
+      "how": "Mão em L com a ponta do polegar apoiada na bochecha. O indicador dobra em gancho e volta a esticar, repetindo.",
       "params": {
         "handshape": "L: polegar e indicador esticados, demais dedos fechados",
         "location": "Bochecha (o polegar toca)",
@@ -15347,7 +15491,10 @@
         "signbank": 2058,
         "ines": "ONTEM"
       },
-      "class": "adverbio"
+      "class": "adverbio",
+      "image": "media/sinais/ontem.svg",
+      "poster": "media/sinais/ontem-parado.svg",
+      "handshapeImage": "media/maos/ontem.svg"
     },
     {
       "id": "ordem",
@@ -16099,7 +16246,11 @@
         "signbank": 371,
         "ines": "BOBAGEM"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/bobagem.svg",
+      "poster": "media/sinais/bobagem-parado.svg",
+      "handshapeImage": "media/maos/bobagem.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma, com as mãos em Y fazendo círculos."
     },
     {
       "id": "cabeca",
@@ -18407,7 +18558,7 @@
         "handshape": "Dominante: S (mão fechada). Apoio: B (mão aberta, dedos unidos)",
         "location": "Espaço neutro, na frente do peito",
         "movement": "Mão fechada desce e bate na palma, 2 vezes",
-        "orientation": "Apoio com a palma para cima e para o corpo; dominante com a palma para baixo",
+        "orientation": "Apoio com a palma para cima e para o corpo; dominante com a palma virada para o lado (para a mão de apoio), batendo com a lateral do dedo mínimo",
         "expression": "Ar de satisfação ou deboche"
       },
       "hands": 2,
@@ -18415,7 +18566,10 @@
         "signbank": 981,
         "ines": "BEM-FEITO1"
       },
-      "class": "expressao"
+      "class": "expressao",
+      "image": "media/sinais/bem-feito.svg",
+      "poster": "media/sinais/bem-feito-parado.svg",
+      "handshapeImage": "media/maos/bem-feito.svg"
     },
     {
       "id": "besouro",
@@ -23374,7 +23528,10 @@
         "signbank": 2129,
         "ines": "PARABENIZAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/parabens.svg",
+      "poster": "media/sinais/parabens-parado.svg",
+      "handshapeImage": "media/maos/parabens.svg"
     },
     {
       "id": "pascoa",
@@ -24089,7 +24246,10 @@
         "signbank": 3184,
         "ines": "QUAL1"
       },
-      "class": "pronome"
+      "class": "pronome",
+      "image": "media/sinais/qual.svg",
+      "poster": "media/sinais/qual-parado.svg",
+      "handshapeImage": "media/maos/qual.svg"
     },
     {
       "id": "queijo",
@@ -24152,7 +24312,10 @@
         "signbank": 3268,
         "ines": "QUEM1"
       },
-      "class": "pronome"
+      "class": "pronome",
+      "image": "media/sinais/quem.svg",
+      "poster": "media/sinais/quem-parado.svg",
+      "handshapeImage": "media/maos/quem.svg"
     },
     {
       "id": "quinzena",
@@ -25560,7 +25723,10 @@
         "signbank": 3027,
         "ines": "VITÓRIA1"
       },
-      "class": "substantivo"
+      "class": "substantivo",
+      "image": "media/sinais/vitoria.svg",
+      "poster": "media/sinais/vitoria-parado.svg",
+      "handshapeImage": "media/maos/vitoria.svg"
     },
     {
       "id": "vomitar",
@@ -25810,7 +25976,10 @@
       "hands": 1,
       "refs": {
         "source": "INES: EU"
-      }
+      },
+      "image": "media/sinais/eu.svg",
+      "poster": "media/sinais/eu-parado.svg",
+      "handshapeImage": "media/maos/eu.svg"
     },
     {
       "id": "ele",
@@ -25834,7 +26003,10 @@
       "hands": 1,
       "refs": {
         "source": "INES: ELE"
-      }
+      },
+      "image": "media/sinais/ele.svg",
+      "poster": "media/sinais/ele-parado.svg",
+      "handshapeImage": "media/maos/ele.svg"
     },
     {
       "id": "nos",
@@ -25856,7 +26028,10 @@
       "hands": 1,
       "refs": {
         "source": "INES: NÓS"
-      }
+      },
+      "image": "media/sinais/nos.svg",
+      "poster": "media/sinais/nos-parado.svg",
+      "handshapeImage": "media/maos/nos.svg"
     },
     {
       "id": "eles",
@@ -25900,7 +26075,10 @@
       "hands": 1,
       "refs": {
         "source": "Signbank 1750 (MÃE)"
-      }
+      },
+      "image": "media/sinais/mae.svg",
+      "poster": "media/sinais/mae-parado.svg",
+      "handshapeImage": "media/maos/mae.svg"
     },
     {
       "id": "beber",
@@ -25913,7 +26091,7 @@
       "class": "verbo",
       "how": "Mão fechada com o polegar esticado (A). A ponta do polegar vai até a boca, encostando de leve nos lábios, e a mão inclina um pouco para trás, como quem bebe de uma garrafa.",
       "params": {
-        "handshape": "A: mão fechada com o polegar esticado",
+        "handshape": "A: mão fechada com o polegar esticado para o lado",
         "location": "Boca (ponta do polegar nos lábios)",
         "movement": "A mão sobe até a boca e inclina para trás pelo punho, uma vez",
         "orientation": "Polegar na horizontal, apontando para a boca; palma voltada para a frente, dedos fechados para cima",
@@ -25922,7 +26100,10 @@
       "hands": 1,
       "refs": {
         "source": "Signbank 339 (BEBER); INES: BEBER1, BEBER2, BEBER3"
-      }
+      },
+      "image": "media/sinais/beber.svg",
+      "poster": "media/sinais/beber-parado.svg",
+      "handshapeImage": "media/maos/beber.svg"
     },
     {
       "id": "amanha",
@@ -25942,7 +26123,10 @@
       "hands": 1,
       "refs": {
         "source": "Signbank 123 (AMANHÃ); INES: AMANHÃ"
-      }
+      },
+      "image": "media/sinais/amanha.svg",
+      "poster": "media/sinais/amanha-parado.svg",
+      "handshapeImage": "media/maos/amanha.svg"
     },
     {
       "id": "quando",
@@ -25951,18 +26135,21 @@
       "category": "basico",
       "topic": "tempo",
       "class": "adverbio",
-      "how": "Mão erguida ao lado do rosto, palma para a frente, começando com o indicador esticado. Os dedos se dobram rápido para a palma, um depois do outro (o indicador primeiro, o mínimo por último), enquanto o polegar se abre para o lado. A mão termina fechada, com o polegar esticado apontando para o rosto. Rosto de pergunta.",
+      "how": "Mão erguida ao lado do rosto, na altura do ombro, palma para a frente, com o indicador esticado para cima e os demais dedos fechados. O polegar se abre para o lado, apontando para o rosto, e logo o indicador se dobra para a palma: a mão termina fechada, só com o polegar esticado em direção ao rosto. Rosto de pergunta.",
       "params": {
-        "handshape": "Começa com o indicador esticado e termina com os dedos dobrados na palma e o polegar esticado para o lado",
+        "handshape": "Começa com o indicador esticado (1), passa por L e termina com a mão fechada e o polegar esticado para o lado",
         "location": "Ao lado do rosto, na altura do ombro, do lado da mão dominante",
-        "movement": "Dedos se fecham em sequência rápida, do indicador ao mínimo, uma vez; a mão fica parada um instante no fim",
+        "movement": "O polegar se abre e em seguida o indicador se dobra, uma vez; a mão fica parada um instante no fim",
         "orientation": "Palma para a frente; no fim o polegar aponta para o rosto",
         "expression": "Interrogativa: sobrancelhas franzidas, cabeça levemente inclinada"
       },
       "hands": 1,
       "refs": {
         "source": "INES QUANDO1 (vídeo); INES QUANDO2 consultado para a variante"
-      }
+      },
+      "image": "media/sinais/quando.svg",
+      "poster": "media/sinais/quando-parado.svg",
+      "handshapeImage": "media/maos/quando.svg"
     },
     {
       "id": "triste",
@@ -25984,7 +26171,10 @@
       "hands": 1,
       "refs": {
         "source": "Signbank 2868 TRISTE (campos + vídeo)"
-      }
+      },
+      "image": "media/sinais/triste.svg",
+      "poster": "media/sinais/triste-parado.svg",
+      "handshapeImage": "media/maos/triste.svg"
     },
     {
       "id": "muito",
@@ -26008,7 +26198,10 @@
       "hands": 2,
       "refs": {
         "source": "Signbank 1942 MUITO (campos + vídeo); INES MUITO1 (vídeo)"
-      }
+      },
+      "image": "media/sinais/muito.svg",
+      "poster": "media/sinais/muito-parado.svg",
+      "handshapeImage": "media/maos/muito.svg"
     },
     {
       "id": "manha",
@@ -26054,7 +26247,10 @@
       "hands": 1,
       "refs": {
         "source": "INES DOIS2 e DOIS1 (vídeos)"
-      }
+      },
+      "image": "media/sinais/dois.svg",
+      "poster": "media/sinais/dois-parado.svg",
+      "handshapeImage": "media/maos/dois.svg"
     },
     {
       "id": "o-que",
@@ -26077,7 +26273,10 @@
       "hands": 1,
       "refs": {
         "source": "Signbank 2023 O-QUE (campos + vídeo)"
-      }
+      },
+      "image": "media/sinais/o-que.svg",
+      "poster": "media/sinais/o-que-parado.svg",
+      "handshapeImage": "media/maos/o-que.svg"
     },
     {
       "id": "por-que",
@@ -26099,7 +26298,10 @@
       "hands": 2,
       "refs": {
         "source": "Signbank 2285 PORQUE (vídeo, feito com rosto de pergunta); mesma forma da entrada PORQUE"
-      }
+      },
+      "image": "media/sinais/por-que.svg",
+      "poster": "media/sinais/por-que-parado.svg",
+      "handshapeImage": "media/maos/por-que.svg"
     }
   ],
   "references": [

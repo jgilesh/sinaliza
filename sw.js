@@ -4,7 +4,7 @@
 // with a short timeout, so a deploy shows up on the next visit.
 // CACHE is stamped by scripts/versao.py from the content of the site: any change makes a new
 // version, install re-caches everything and open pages reload once.
-const CACHE = 'sinais-e8ac5b324b';
+const CACHE = 'sinais-5201550017';
 const CORE = [
   './', 'index.html', 'css/app.css', 'js/app.js', 'js/search.js', 'js/frases.js', 'data/sinais.json', 'data/frases.json',
   'manifest.webmanifest', 'icons/icon.svg', 'icons/apple-touch-icon.png',
@@ -17,12 +17,13 @@ self.addEventListener('install', event => {
     const cache = await caches.open(CACHE);
     // 'reload' skips the browser's HTTP cache, so a new version never stores old files.
     await cache.addAll(CORE.map(url => new Request(url, { cache: 'reload' })));
-    // Every drawing listed in the data (read from the copy just cached), so all signs work
-    // offline from the first visit. One missing file must not cancel offline mode for the rest.
+    // The still drawing and handshape picture of every sign (small files), so lists and sentences
+    // work offline from the first visit. The animated drawings are larger; each is cached the first
+    // time it is opened (cacheFirst below). One missing file must not cancel offline mode for the rest.
     const res = await cache.match('data/sinais.json');
     if (res) {
       const data = await res.json();
-      const media = data.signs.flatMap(s => [s.image, s.poster, s.handshapeImage]).filter(Boolean);
+      const media = data.signs.flatMap(s => [s.poster, s.handshapeImage]).filter(Boolean);
       const results = await Promise.allSettled(media.map(url => cache.add(new Request(url, { cache: 'reload' }))));
       results.forEach((r, i) => r.status === 'rejected' && console.warn('SW: not cached', media[i]));
     }

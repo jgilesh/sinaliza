@@ -2771,6 +2771,19 @@ def review_sheet(sid, sign, frames, count=6, cols=3):
             f'<rect width="100%" height="100%" fill="#fff"/>' + ''.join(cells) + '</svg>')
 
 
+# More signs live one per file in scripts/sinais/<id>.py, so several people (or agents) can add
+# signs at once without touching this file. Each file runs in this module's namespace and sets
+# SIGNS['<id>'] and TITLES['<id>'] (it may define its own hs_* handshapes with the helpers above).
+# Each file gets its own copy of the namespace, so its local names can't overwrite the engine's
+# (SIGNS, TITLES and HANDSHAPES are shared objects, so entries added to them still count).
+SIGN_DIR = Path(__file__).resolve().parent / 'sinais'
+for _spec in sorted(SIGN_DIR.glob('*.py')):
+    try:
+        exec(compile(_spec.read_text(encoding='utf-8'), str(_spec), 'exec'), dict(globals()))
+    except Exception as _err:   # one broken file must not stop the other signs
+        print(f'SKIPPED {_spec.name}: {type(_err).__name__}: {_err}', file=sys.stderr)
+
+
 def main(argv):
     sheet_dir = None
     if '--sheet' in argv:
