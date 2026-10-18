@@ -2,7 +2,7 @@
 
 A Libras (Brazilian Sign Language) dictionary for an **interpreter** who needs a sign in the moment, on a phone or a computer. Type a Portuguese word (accents optional, typos tolerated) and the best match shows up big right away, with an animated drawing of the sign and its parameters. Personal project for John; not a Finances Demystified project, so the demystified brand does not apply.
 
-Status (18 Oct 2026): 1,151 signs. Repo: https://github.com/jgilesh/Sinaliza (John renamed the app from "Sinais" to **Sinaliza** on 18 Oct; it is for interpreters to look up and pass on signs, and for Deaf people to learn). **Básico** has 1,150 (17 topics); 5 of them have drawings (água, café, família, obrigado, você), the rest are text entries ("Desenho em breve") waiting for drawings in checked batches. **Tecnologia** has computador (drawn). Favicon change is on hold (John, 18 Oct); options were shown.
+Status (18 Oct 2026): 1,151 signs. Repo: https://github.com/jgilesh/Sinaliza (John renamed the app from "Sinais" to **Sinaliza** on 18 Oct; it is for interpreters to look up and pass on signs, and for Deaf people to learn). **Básico** has 1,150 (17 topics); 5 of them have drawings (água, café, família, obrigado, você), the rest are text entries ("Desenho em breve") waiting for drawings in checked batches. **Tecnologia** has computador (drawn). Look (John, 18 Oct): calm palette with few colours, ameixa (plum) for almost everything and terracota only for accents (tokens at the top of `css/app.css`, light and dark); logo/favicon = two interlocking rings, terracota and white on plum (`icons/`), meaning hearing and Deaf people connected. Planned: open the app with a choice between "ouvinte" and "surdo" (two audiences: hearing people learning signs, e.g. parents and interpreters in training, and Deaf people learning Libras).
 
 ## How the Básico words were made (15 Oct 2026)
 
@@ -17,7 +17,7 @@ The expert (the Libras interpreter the app is for) wants people to *use* signs i
 
 ## Categories
 
-- John's plan: interpreters already know everyday signs, so the value is in advanced, specialised categories. **Básico** holds everyday signs; every other category is a specialised area (Tecnologia first; John will send more names and sections). Each category has its own color token (`--cat-<id>` in `css/app.css`), an icon (`ICONS` in `js/app.js`) and a one-line description in `data/sinais.json`.
+- John's plan: interpreters already know everyday signs, so the value is in advanced, specialised categories. **Básico** holds everyday signs; every other category is a specialised area (Tecnologia first; John will send more names and sections). Each category has its own color token (`--cat-<id>` in `css/app.css`; keep them inside the ameixa/terracota palette), an icon (`ICONS` in `js/app.js`) and a one-line description in `data/sinais.json`.
 - Home shows one section per category; Básico shows topic tiles (`categories[].topics`, sign `topic`) that open a word list. The chips filter browsing only: **search always covers every category** (John). Near-miss (typo) results only show when nothing real matches.
 
 ## Non-negotiables
