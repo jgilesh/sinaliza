@@ -4,10 +4,10 @@
 // with a short timeout, so a deploy shows up on the next visit.
 // CACHE is stamped by scripts/versao.py from the content of the site: any change makes a new
 // version, install re-caches everything and open pages reload once.
-const CACHE = 'sinais-c4f2d716ee';
+const CACHE = 'sinais-fb3e1834c4';
 const CORE = [
   './', 'index.html', 'css/app.css', 'js/app.js', 'js/search.js', 'js/frases.js', 'data/sinais.json', 'data/frases.json',
-  'manifest.webmanifest', 'icons/icon.svg', 'icons/apple-touch-icon.png',
+  'manifest.webmanifest', 'icons/sinaliza.svg', 'icons/sinaliza-apple-touch.png',
 ];
 const PAGE_TIMEOUT_MS = 2500;
 const APP_PATH = new URL('./', self.location).pathname;
