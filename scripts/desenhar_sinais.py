@@ -2448,11 +2448,15 @@ def sign_svg(sid, sign, frames, frame=None, title='', body=True):
     if 'left' not in sign['hands'] and not sign.get('hand_only'):
         draw.append(f'<g stroke-linecap="round" stroke-linejoin="round">{rest_arm_svg()}</g>' + front_hair_svg())
 
+    # Shadows fall on the torso only: all of them are drawn before any arm or hand, so a hand in
+    # front never casts a grey band over the other hand.
+    shadow_at, shadows = len(draw), []
     for i, arm in order:
         if not sign.get('hand_only'):
             for part in ('up', 'upline', 'fo', 'folds', 'cuff', 'wrist'):
                 animated_path(f'{arm}-{part}', [f['armgeo'][arm][part] for f in frames])
-            draw.append(shadow(f'{arm}-fo', 3, 4) + '<g stroke-linecap="round" stroke-linejoin="round">'
+            shadows.append(shadow(f'{arm}-fo', 3, 4))
+            draw.append('<g stroke-linecap="round" stroke-linejoin="round">'
                         + use(f'{arm}-up', f' fill="{SHIRT}"')
                         + use(f'{arm}-upline', f' fill="none"' + stroke(SHIRT_LINE, BODY_LINE))
                         + use(f'{arm}-fo', f' fill="{SHIRT}"' + stroke(SHIRT_LINE, BODY_LINE))
@@ -2686,8 +2690,9 @@ def sign_svg(sid, sign, frames, frame=None, title='', body=True):
                     f'<rect x="-500" y="-500" width="1500" height="1500" fill="#fff"/>{palm_black}</mask>')
         layer_svg = lambda layer: ''.join(group_ink(layer, s) + ''.join(masked(n, digit(n, layer, s)) for n in DIGITS)
                                           for s in range(10))
-        draw.append(('' if sign.get('hand_only') else shadow(f'{hid}-palm', 4, 5))
-                    + '<g fill="none" stroke-linecap="round" stroke-linejoin="round">'
+        if not sign.get('hand_only'):
+            shadows.append(shadow(f'{hid}-palm', 4, 5))
+        draw.append('<g fill="none" stroke-linecap="round" stroke-linejoin="round">'
                     + layer_svg('back')
                     + thenar_back + thenar_ink
                     # The ring's opening is shaded under the palm, web and thumb mound: where the
@@ -2702,6 +2707,7 @@ def sign_svg(sid, sign, frames, frame=None, title='', body=True):
                     + knuckles
                     + '</g>')
 
+    draw.insert(shadow_at, ''.join(shadows))
     marks = ''.join(
         f'<g transform="translate({x} {y}) rotate({a})" stroke="{ACCENT}" stroke-width="2.4" stroke-linecap="round">'
         f'<path d="M0 -6V-12M-6 -4L-10 -8M6 -4L10 -8"/></g>' for x, y, a in sign.get('marks', []))
