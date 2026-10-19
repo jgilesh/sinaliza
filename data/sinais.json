@@ -473,7 +473,11 @@
         "signbank": 689,
         "ines": "COMEÇAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/comecar.svg",
+      "poster": "media/sinais/comecar-parado.svg",
+      "handshapeImage": "media/maos/comecar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma, com as duas mãos e os polegares para cima."
     },
     {
       "id": "escola",
@@ -570,7 +574,11 @@
         "signbank": 2196,
         "ines": "PENSAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/pensar.svg",
+      "poster": "media/sinais/pensar-parado.svg",
+      "handshapeImage": "media/maos/pensar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma, com a mão aberta junto à têmpora, afastando-se da cabeça."
     },
     {
       "id": "escrever",
@@ -713,7 +721,10 @@
         "signbank": 1091,
         "ines": "ENSINAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/ensinar.svg",
+      "poster": "media/sinais/ensinar-parado.svg",
+      "handshapeImage": "media/maos/ensinar.svg"
     },
     {
       "id": "ler",
@@ -970,7 +981,10 @@
         "signbank": 591,
         "ines": "CHAMAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/chamar.svg",
+      "poster": "media/sinais/chamar-parado.svg",
+      "handshapeImage": "media/maos/chamar.svg"
     },
     {
       "id": "grupo",
@@ -1696,7 +1710,10 @@
         "signbank": 1197,
         "ines": "FALTAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/faltar.svg",
+      "poster": "media/sinais/faltar-parado.svg",
+      "handshapeImage": "media/maos/faltar.svg"
     },
     {
       "id": "fazer",
@@ -1786,7 +1803,10 @@
         "signbank": 1175,
         "ines": "EXPLICAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/explicar.svg",
+      "poster": "media/sinais/explicar-parado.svg",
+      "handshapeImage": "media/maos/explicar.svg"
     },
     {
       "id": "entender",
@@ -1955,7 +1975,11 @@
         "signbank": 2211,
         "ines": "PERGUNTAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/perguntar.svg",
+      "poster": "media/sinais/perguntar-parado.svg",
+      "handshapeImage": "media/maos/perguntar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: o indicador desliza sobre a outra mão diante do ombro do lado da mão de apoio."
     },
     {
       "id": "dar",
@@ -1978,7 +2002,10 @@
         "signbank": 830,
         "ines": "DAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/dar.svg",
+      "poster": "media/sinais/dar-parado.svg",
+      "handshapeImage": "media/maos/dar.svg"
     },
     {
       "id": "coisa",
@@ -2161,7 +2188,10 @@
         "signbank": 1076,
         "ines": "ENCONTRAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/encontrar.svg",
+      "poster": "media/sinais/encontrar-parado.svg",
+      "handshapeImage": "media/maos/encontrar.svg"
     },
     {
       "id": "incentivar",
@@ -2228,7 +2258,10 @@
         "signbank": 1926,
         "ines": "MOSTRAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/mostrar.svg",
+      "poster": "media/sinais/mostrar-parado.svg",
+      "handshapeImage": "media/maos/mostrar.svg"
     },
     {
       "id": "faculdade",
@@ -2291,7 +2324,10 @@
         "signbank": 29,
         "ines": "ACEITAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/aceitar.svg",
+      "poster": "media/sinais/aceitar-parado.svg",
+      "handshapeImage": "media/maos/aceitar.svg"
     },
     {
       "id": "voltar",
@@ -2314,7 +2350,10 @@
         "signbank": 3039,
         "ines": "VOLTAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/voltar.svg",
+      "poster": "media/sinais/voltar-parado.svg",
+      "handshapeImage": "media/maos/voltar.svg"
     },
     {
       "id": "possivel",
@@ -2526,7 +2565,10 @@
         "signbank": 2780,
         "ines": "TENTAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/tentar.svg",
+      "poster": "media/sinais/tentar-parado.svg",
+      "handshapeImage": "media/maos/tentar.svg"
     },
     {
       "id": "pesquisar",
@@ -2729,7 +2771,11 @@
         "signbank": 1151,
         "ines": "ESTRANHO"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/estranho.svg",
+      "poster": "media/sinais/estranho-parado.svg",
+      "handshapeImage": "media/maos/estranho.svg",
+      "regionalNote": "No dicionário do INES a mão aberta parte da testa e se afasta para o lado."
     },
     {
       "id": "hora",
@@ -2816,7 +2862,11 @@
         "signbank": 796,
         "ines": "CRIAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/criar.svg",
+      "poster": "media/sinais/criar-parado.svg",
+      "handshapeImage": "media/maos/criar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: as duas mãos se juntam à frente do peito."
     },
     {
       "id": "casar",
@@ -2987,7 +3037,10 @@
         "signbank": 763,
         "ines": "COPIAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/copiar.svg",
+      "poster": "media/sinais/copiar-parado.svg",
+      "handshapeImage": "media/maos/copiar.svg"
     },
     {
       "id": "filho",
@@ -3040,7 +3093,10 @@
         "signbank": 2944,
         "ines": "VÁRIOS1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/varios.svg",
+      "poster": "media/sinais/varios-parado.svg",
+      "handshapeImage": "media/maos/varios.svg"
     },
     {
       "id": "irmao",
@@ -3260,7 +3316,10 @@
         "signbank": 414,
         "ines": "BRINCAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/brincar.svg",
+      "poster": "media/sinais/brincar-parado.svg",
+      "handshapeImage": "media/maos/brincar.svg"
     },
     {
       "id": "primo",
@@ -3451,7 +3510,10 @@
         "signbank": 2356,
         "ines": "PROIBIR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/proibir.svg",
+      "poster": "media/sinais/proibir-parado.svg",
+      "handshapeImage": "media/maos/proibir.svg"
     },
     {
       "id": "viajar",
@@ -3613,7 +3675,7 @@
         "handshape": "L: polegar e indicador esticados, demais dedos fechados",
         "location": "Do lado do ombro até a altura da cintura, do lado da mão que sinaliza",
         "movement": "Um movimento rápido para a frente e para baixo, girando o pulso",
-        "orientation": "Começa com a palma para o lado e termina com a palma para baixo",
+        "orientation": "Começa com a palma virada para o corpo e para o centro e termina com a palma para baixo",
         "expression": "Sobrancelhas levemente franzidas"
       },
       "hands": 1,
@@ -3621,7 +3683,10 @@
         "signbank": 831,
         "ines": "REPETIR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/de-novo.svg",
+      "poster": "media/sinais/de-novo-parado.svg",
+      "handshapeImage": "media/maos/de-novo.svg"
     },
     {
       "id": "fora",
@@ -3700,7 +3765,7 @@
       ],
       "category": "basico",
       "topic": "acoes",
-      "how": "As duas mãos com o dedo médio dobrado e preso no polegar, perto do queixo e do ombro. Os dedos se soltam de uma vez e as mãos abertas descem para a frente num arco.",
+      "how": "As duas mãos com o dedo médio dobrado e preso no polegar, a dominante perto do queixo e a outra erguida perto do ombro. Os dedos se soltam de uma vez; a mão dominante, aberta, desce para a frente num arco até a frente do peito, palma para baixo, e a outra se abre onde está.",
       "params": {
         "handshape": "Começa com o médio dobrado preso pelo polegar e os outros dedos abertos; termina com a mão aberta e os dedos separados",
         "location": "Começa perto do queixo e do ombro e termina à frente do peito",
@@ -3713,7 +3778,10 @@
         "signbank": 9,
         "ines": "ABANDONAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/abandonar.svg",
+      "poster": "media/sinais/abandonar-parado.svg",
+      "handshapeImage": "media/maos/abandonar.svg"
     },
     {
       "id": "sala",
@@ -4341,7 +4409,10 @@
         "signbank": 1121,
         "ines": "ESPALHAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/espalhar.svg",
+      "poster": "media/sinais/espalhar-parado.svg",
+      "handshapeImage": "media/maos/espalhar.svg"
     },
     {
       "id": "responder",
@@ -5049,7 +5120,10 @@
         "signbank": 1892,
         "ines": "MISTURAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/misturar.svg",
+      "poster": "media/sinais/misturar-parado.svg",
+      "handshapeImage": "media/maos/misturar.svg"
     },
     {
       "id": "pior",
@@ -5164,7 +5238,10 @@
         "signbank": 873,
         "ines": "DESENHAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/desenhar.svg",
+      "poster": "media/sinais/desenhar-parado.svg",
+      "handshapeImage": "media/maos/desenhar.svg"
     },
     {
       "id": "tarde",
@@ -5348,7 +5425,11 @@
         "signbank": 257,
         "ines": "ATRAPALHAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/atrapalhar.svg",
+      "poster": "media/sinais/atrapalhar-parado.svg",
+      "handshapeImage": "media/maos/atrapalhar.svg",
+      "regionalNote": "No dicionário do INES os dedos se entrelaçam, cruzando à frente do peito."
     },
     {
       "id": "biblioteca",
@@ -5498,7 +5579,7 @@
       "topic": "acoes",
       "how": "A mão aberta, com os dedos separados e a palma para a frente, encosta o lado do polegar na lateral da testa. Os dedos se curvam e a mão se afasta para o lado e para a frente, terminando fechada.",
       "params": {
-        "handshape": "Mão aberta com os dedos separados, que se curvam e se fecham no final",
+        "handshape": "Mão aberta com os dedos separados, que se curvam e se juntam no final",
         "location": "Lado da testa (têmpora)",
         "movement": "Afasta-se da testa para fora e para a frente enquanto os dedos se fecham; uma vez",
         "orientation": "Palma virada para a frente, com o lado do polegar junto à testa; continua para a frente enquanto a mão se afasta",
@@ -5509,7 +5590,10 @@
         "signbank": 2458,
         "ines": "RESOLVER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/resolver.svg",
+      "poster": "media/sinais/resolver-parado.svg",
+      "handshapeImage": "media/maos/resolver.svg"
     },
     {
       "id": "sorte",
@@ -5557,7 +5641,10 @@
         "signbank": 1228,
         "ines": "FICAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/ficar.svg",
+      "poster": "media/sinais/ficar-parado.svg",
+      "handshapeImage": "media/maos/ficar.svg"
     },
     {
       "id": "livrar",
@@ -5582,7 +5669,11 @@
         "signbank": 1707,
         "ines": "LIVRAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/livrar.svg",
+      "poster": "media/sinais/livrar-parado.svg",
+      "handshapeImage": "media/maos/livrar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: as mãos abertas se cruzam diante do rosto e se afastam para os lados da cabeça."
     },
     {
       "id": "rir",
@@ -5603,7 +5694,10 @@
         "signbank": 2487,
         "ines": "RIR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/rir.svg",
+      "poster": "media/sinais/rir-parado.svg",
+      "handshapeImage": "media/maos/rir.svg"
     },
     {
       "id": "segundo",
@@ -5687,7 +5781,11 @@
         "signbank": 1002,
         "ines": "GANHAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/ganhar.svg",
+      "poster": "media/sinais/ganhar-parado.svg",
+      "handshapeImage": "media/maos/ganhar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: a mão em L ao lado da cabeça, que se fecha."
     },
     {
       "id": "morrer",
@@ -6006,7 +6104,10 @@
         "signbank": 2703,
         "ines": "SUBSTITUIR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/substituir.svg",
+      "poster": "media/sinais/substituir-parado.svg",
+      "handshapeImage": "media/maos/substituir.svg"
     },
     {
       "id": "teatro",
@@ -6048,7 +6149,10 @@
         "signbank": 2106,
         "ines": "PALESTRAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/palestrar.svg",
+      "poster": "media/sinais/palestrar-parado.svg",
+      "handshapeImage": "media/maos/palestrar.svg"
     },
     {
       "id": "vestibular",
@@ -6731,7 +6835,10 @@
         "signbank": 1102,
         "ines": "ERRAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/errar.svg",
+      "poster": "media/sinais/errar-parado.svg",
+      "handshapeImage": "media/maos/errar.svg"
     },
     {
       "id": "perto",
@@ -6849,7 +6956,10 @@
         "signbank": 697,
         "ines": "ACRESCENTAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/acrescentar.svg",
+      "poster": "media/sinais/acrescentar-parado.svg",
+      "handshapeImage": "media/maos/acrescentar.svg"
     },
     {
       "id": "complicado",
@@ -7038,7 +7148,11 @@
         "signbank": 1134,
         "ines": "ESQUECER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/esquecer.svg",
+      "poster": "media/sinais/esquecer-parado.svg",
+      "handshapeImage": "media/maos/esquecer.svg",
+      "regionalNote": "No dicionário do INES a mão continua aberta ao deslizar da testa, sem fechar."
     },
     {
       "id": "fraco",
@@ -7397,7 +7511,11 @@
         "signbank": 952,
         "ines": "DORMIR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/dormir.svg",
+      "poster": "media/sinais/dormir-parado.svg",
+      "handshapeImage": "media/maos/dormir.svg",
+      "regionalNote": "No dicionário do INES aparece também a forma com a cabeça apoiada na palma da mão aberta, ao lado do rosto."
     },
     {
       "id": "duvidar",
@@ -7540,7 +7658,10 @@
         "signbank": 2370,
         "ines": "PROVOCAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/provocar.svg",
+      "poster": "media/sinais/provocar-parado.svg",
+      "handshapeImage": "media/maos/provocar.svg"
     },
     {
       "id": "cultura",
@@ -7609,7 +7730,10 @@
         "signbank": 847,
         "ines": "DEMORAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/demorar.svg",
+      "poster": "media/sinais/demorar-parado.svg",
+      "handshapeImage": "media/maos/demorar.svg"
     },
     {
       "id": "documento",
@@ -8575,11 +8699,11 @@
       "aliases": [],
       "category": "basico",
       "topic": "escola",
-      "how": "Mão aberta na altura do ombro, com a palma para a frente. Os dedos mexem um a um, como se digitassem, enquanto a mão vai de lado a lado.",
+      "how": "Mão aberta na altura do ombro, com a palma para a frente. Os dedos mexem um a um, como se digitassem, enquanto a mão se desloca para o lado.",
       "params": {
         "handshape": "Mão aberta, dedos separados e um pouco curvados, mexendo",
         "location": "Na frente do ombro da mão dominante",
-        "movement": "Dedos mexendo sem parar enquanto a mão se desloca para o lado e volta",
+        "movement": "Dedos mexendo sem parar enquanto a mão se desloca para o lado, uma vez",
         "orientation": "Palma para a frente",
         "expression": "Neutra"
       },
@@ -8588,7 +8712,10 @@
         "signbank": 2674,
         "ines": "SOLETRAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/soletrar.svg",
+      "poster": "media/sinais/soletrar-parado.svg",
+      "handshapeImage": "media/maos/soletrar.svg"
     },
     {
       "id": "terceiro",
@@ -8632,7 +8759,10 @@
         "signbank": 2959,
         "ines": "VENDER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/vender.svg",
+      "poster": "media/sinais/vender-parado.svg",
+      "handshapeImage": "media/maos/vender.svg"
     },
     {
       "id": "calor",
@@ -9042,7 +9172,10 @@
         "signbank": 3024,
         "ines": "VISITAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/visitar.svg",
+      "poster": "media/sinais/visitar-parado.svg",
+      "handshapeImage": "media/maos/visitar.svg"
     },
     {
       "id": "ainda-nao",
@@ -9244,7 +9377,10 @@
         "signbank": 2846,
         "ines": "TRATAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/tratar.svg",
+      "poster": "media/sinais/tratar-parado.svg",
+      "handshapeImage": "media/maos/tratar.svg"
     },
     {
       "id": "trocar",
@@ -9431,7 +9567,11 @@
         "signbank": 2583,
         "ines": "SEGURAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/segurar.svg",
+      "poster": "media/sinais/segurar-parado.svg",
+      "handshapeImage": "media/maos/segurar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma, com as duas mãos fechadas separadas, na altura dos ombros."
     },
     {
       "id": "susto",
@@ -9503,7 +9643,10 @@
         "signbank": 725,
         "ines": "CONFUNDIR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/confundir.svg",
+      "poster": "media/sinais/confundir-parado.svg",
+      "handshapeImage": "media/maos/confundir.svg"
     },
     {
       "id": "famoso",
@@ -9590,7 +9733,10 @@
         "signbank": 2161,
         "ines": "PASSEAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/passear.svg",
+      "poster": "media/sinais/passear-parado.svg",
+      "handshapeImage": "media/maos/passear.svg"
     },
     {
       "id": "presente",
@@ -10226,7 +10372,10 @@
         "signbank": 696,
         "ines": "COMPETIR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/competir.svg",
+      "poster": "media/sinais/competir-parado.svg",
+      "handshapeImage": "media/maos/competir.svg"
     },
     {
       "id": "diretor",
@@ -10291,7 +10440,10 @@
         "signbank": 1168,
         "ines": "EVITAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/evitar.svg",
+      "poster": "media/sinais/evitar-parado.svg",
+      "handshapeImage": "media/maos/evitar.svg"
     },
     {
       "id": "pular",
@@ -10623,7 +10775,10 @@
         "signbank": 2316,
         "ines": "PREJUDICAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/prejudicar.svg",
+      "poster": "media/sinais/prejudicar-parado.svg",
+      "handshapeImage": "media/maos/prejudicar.svg"
     },
     {
       "id": "quarto",
@@ -10867,7 +11022,10 @@
         "signbank": 3078,
         "ines": "ZOMBAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/zombar.svg",
+      "poster": "media/sinais/zombar-parado.svg",
+      "handshapeImage": "media/maos/zombar.svg"
     },
     {
       "id": "aguentar",
@@ -10888,7 +11046,10 @@
         "signbank": 3122,
         "ines": "AGÜENTAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/aguentar.svg",
+      "poster": "media/sinais/aguentar-parado.svg",
+      "handshapeImage": "media/maos/aguentar.svg"
     },
     {
       "id": "azul",
@@ -11467,7 +11628,11 @@
         "signbank": 2243,
         "ines": "PINTAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/pintar.svg",
+      "poster": "media/sinais/pintar-parado.svg",
+      "handshapeImage": "media/maos/pintar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: uma mão só pincelando para cima e para baixo no ar, como quem pinta uma parede."
     },
     {
       "id": "proposta",
@@ -11651,7 +11816,10 @@
         "signbank": 2966,
         "ines": "VER-NÃO"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/nao-ver.svg",
+      "poster": "media/sinais/nao-ver-parado.svg",
+      "handshapeImage": "media/maos/nao-ver.svg"
     },
     {
       "id": "agradecer",
@@ -11838,7 +12006,10 @@
         "signbank": 723,
         "ines": "CONSERTAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/consertar.svg",
+      "poster": "media/sinais/consertar-parado.svg",
+      "handshapeImage": "media/maos/consertar.svg"
     },
     {
       "id": "dependente",
@@ -12160,7 +12331,11 @@
         "signbank": 277,
         "ines": "AVANÇAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/avancar.svg",
+      "poster": "media/sinais/avancar-parado.svg",
+      "handshapeImage": "media/maos/avancar.svg",
+      "regionalNote": "No dicionário do INES aparece uma forma em que a mão passa à frente do corpo de um lado ao outro, como um carro avançando."
     },
     {
       "id": "banheiro",
@@ -12854,7 +13029,11 @@
         "signbank": 1360,
         "ines": "GASTAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/gastar.svg",
+      "poster": "media/sinais/gastar-parado.svg",
+      "handshapeImage": "media/maos/gastar.svg",
+      "regionalNote": "No dicionário do INES as mãos se abrem na altura dos ombros ou da cabeça."
     },
     {
       "id": "inventar",
@@ -13372,7 +13551,10 @@
         "signbank": 487,
         "ines": "CANCELAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/cancelar.svg",
+      "poster": "media/sinais/cancelar-parado.svg",
+      "handshapeImage": "media/maos/cancelar.svg"
     },
     {
       "id": "compreender",
@@ -13395,7 +13577,10 @@
         "signbank": 702,
         "ines": "COMPREENDER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/compreender.svg",
+      "poster": "media/sinais/compreender-parado.svg",
+      "handshapeImage": "media/maos/compreender.svg"
     },
     {
       "id": "concordar",
@@ -13463,7 +13648,10 @@
         "signbank": 747,
         "ines": "CONTRATAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/contratar.svg",
+      "poster": "media/sinais/contratar-parado.svg",
+      "handshapeImage": "media/maos/contratar.svg"
     },
     {
       "id": "culpado",
@@ -13695,7 +13883,11 @@
         "signbank": 1512,
         "ines": "IMPRIMIR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/imprimir.svg",
+      "poster": "media/sinais/imprimir-parado.svg",
+      "handshapeImage": "media/maos/imprimir.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: a mão aberta desliza sobre a palma da outra mão, como papel saindo da impressora."
     },
     {
       "id": "incomodar",
@@ -13718,7 +13910,10 @@
         "signbank": 598,
         "ines": "INCOMODAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/incomodar.svg",
+      "poster": "media/sinais/incomodar-parado.svg",
+      "handshapeImage": "media/maos/incomodar.svg"
     },
     {
       "id": "independente",
@@ -13913,7 +14108,10 @@
         "signbank": 1027,
         "ines": "ROUBAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/roubar.svg",
+      "poster": "media/sinais/roubar-parado.svg",
+      "handshapeImage": "media/maos/roubar.svg"
     },
     {
       "id": "segredo",
@@ -14046,7 +14244,11 @@
         "signbank": 190,
         "ines": "APOSENTAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/aposentar.svg",
+      "poster": "media/sinais/aposentar-parado.svg",
+      "handshapeImage": "media/maos/aposentar.svg",
+      "regionalNote": "No dicionário do INES a mão em P fica atravessada à frente do peito."
     },
     {
       "id": "banco",
@@ -14410,7 +14612,11 @@
         "signbank": 1814,
         "ines": "MATAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/matar.svg",
+      "poster": "media/sinais/matar-parado.svg",
+      "handshapeImage": "media/maos/matar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: uma mão só, golpeando para baixo ao lado do corpo."
     },
     {
       "id": "mil",
@@ -14799,7 +15005,11 @@
         "signbank": 178,
         "ines": "APAIXONAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/apaixonar.svg",
+      "poster": "media/sinais/apaixonar-parado.svg",
+      "handshapeImage": "media/maos/apaixonar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: a mão se fecha sobre o peito, no coração."
     },
     {
       "id": "apelido",
@@ -15044,7 +15254,11 @@
         "signbank": 850,
         "ines": "DENUNCIAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/denunciar.svg",
+      "poster": "media/sinais/denunciar-parado.svg",
+      "handshapeImage": "media/maos/denunciar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: a mão fechada sai do queixo para o lado."
     },
     {
       "id": "depressa",
@@ -15113,7 +15327,10 @@
         "signbank": 894,
         "ines": "DEVER1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/dever.svg",
+      "poster": "media/sinais/dever-parado.svg",
+      "handshapeImage": "media/maos/dever.svg"
     },
     {
       "id": "certificado",
@@ -15206,7 +15423,10 @@
         "signbank": 1070,
         "ines": "EMPATAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/empatar.svg",
+      "poster": "media/sinais/empatar-parado.svg",
+      "handshapeImage": "media/maos/empatar.svg"
     },
     {
       "id": "empurrar",
@@ -15314,7 +15534,11 @@
         "signbank": 1266,
         "ines": "FOFOCAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/fofocar.svg",
+      "poster": "media/sinais/fofocar-parado.svg",
+      "handshapeImage": "media/maos/fofocar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma, com uma mão só: o polegar na boca e três dedos para cima."
     },
     {
       "id": "gordo",
@@ -15714,7 +15938,11 @@
         "signbank": 2033,
         "ines": "OCUPAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/ocupar.svg",
+      "poster": "media/sinais/ocupar-parado.svg",
+      "handshapeImage": "media/maos/ocupar.svg",
+      "regionalNote": "No dicionário do INES aparece uma forma com uma só mão em garra, que varre o espaço diante do corpo."
     },
     {
       "id": "ontem",
@@ -15974,7 +16202,11 @@
         "signbank": 2417,
         "ines": "RASGAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/rasgar.svg",
+      "poster": "media/sinais/rasgar-parado.svg",
+      "handshapeImage": "media/maos/rasgar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: uma mão só rasgando à frente do peito."
     },
     {
       "id": "relacionar",
@@ -16133,7 +16365,10 @@
         "signbank": 2675,
         "ines": "SOLICITAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/solicitar.svg",
+      "poster": "media/sinais/solicitar-parado.svg",
+      "handshapeImage": "media/maos/solicitar.svg"
     },
     {
       "id": "sono",
@@ -16369,7 +16604,10 @@
         "signbank": 165,
         "ines": "ANOTAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/anotar.svg",
+      "poster": "media/sinais/anotar-parado.svg",
+      "handshapeImage": "media/maos/anotar.svg"
     },
     {
       "id": "apagar-a-luz",
@@ -16420,7 +16658,11 @@
         "signbank": 198,
         "ines": "APROXIMAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/aproximar.svg",
+      "poster": "media/sinais/aproximar-parado.svg",
+      "handshapeImage": "media/maos/aproximar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma, com os dois indicadores para cima, um se aproximando do outro."
     },
     {
       "id": "bandeira",
@@ -16719,7 +16961,11 @@
         "signbank": 751,
         "ines": "CONVENCER1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/convencer.svg",
+      "poster": "media/sinais/convencer-parado.svg",
+      "handshapeImage": "media/maos/convencer.svg",
+      "regionalNote": "No dicionário do INES a mão aberta em pé passa diante do antebraço da outra mão."
     },
     {
       "id": "cor",
@@ -16986,7 +17232,10 @@
         "signbank": 1165,
         "ines": "EVACUAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/evacuar.svg",
+      "poster": "media/sinais/evacuar-parado.svg",
+      "handshapeImage": "media/maos/evacuar.svg"
     },
     {
       "id": "expulsar",
@@ -17009,7 +17258,10 @@
         "signbank": 1180,
         "ines": "EXPULSAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/expulsar.svg",
+      "poster": "media/sinais/expulsar-parado.svg",
+      "handshapeImage": "media/maos/expulsar.svg"
     },
     {
       "id": "favela",
@@ -17379,7 +17631,10 @@
         "signbank": 1439,
         "ines": "ORIENTAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/orientar.svg",
+      "poster": "media/sinais/orientar-parado.svg",
+      "handshapeImage": "media/maos/orientar.svg"
     },
     {
       "id": "pente",
@@ -17564,7 +17819,11 @@
         "signbank": 2853,
         "ines": "TREMER1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/tremer.svg",
+      "poster": "media/sinais/tremer-parado.svg",
+      "handshapeImage": "media/maos/tremer.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: as mãos fechadas tremem ao lado dos ombros, como quem sente frio."
     },
     {
       "id": "urgente",
@@ -17610,7 +17869,10 @@
         "signbank": 2946,
         "ines": "VARRER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/varrer.svg",
+      "poster": "media/sinais/varrer-parado.svg",
+      "handshapeImage": "media/maos/varrer.svg"
     },
     {
       "id": "violencia",
@@ -18330,7 +18592,10 @@
         "signbank": 186,
         "ines": "APITAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/apitar.svg",
+      "poster": "media/sinais/apitar-parado.svg",
+      "handshapeImage": "media/maos/apitar.svg"
     },
     {
       "id": "ar",
@@ -18464,7 +18729,11 @@
         "signbank": 242,
         "ines": "ASSUMIR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/assumir.svg",
+      "poster": "media/sinais/assumir-parado.svg",
+      "handshapeImage": "media/maos/assumir.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: a mão em A (polegar para cima) vem de lado e pousa sobre a outra mão fechada."
     },
     {
       "id": "atacar",
@@ -18995,7 +19264,11 @@
         "signbank": 982,
         "ines": "BOCEJAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/bocejar.svg",
+      "poster": "media/sinais/bocejar-parado.svg",
+      "handshapeImage": "media/maos/bocejar.svg",
+      "regionalNote": "No dicionário do INES a mão ao lado da boca abre e fecha polegar e dedos, como a boca bocejando."
     },
     {
       "id": "bochecha",
@@ -19897,7 +20170,7 @@
       "how": "As duas mãos com os dedos dobrados para baixo, palmas para baixo, se afastam do centro até os lados da cintura e param ali, com um leve balanço dos punhos. O rosto mostra tédio, olhar para cima e cabeça inclinada.",
       "params": {
         "handshape": "Mão aberta com os quatro dedos unidos dobrados a 90° para baixo, polegar solto ao lado (as duas mãos iguais)",
-        "location": "Espaço neutro, na altura da cintura, uma mão de cada lado do corpo",
+        "location": "Espaço neutro, na parte de baixo do peito, uma mão de cada lado do corpo",
         "movement": "Mãos se afastam do centro para os lados e param; pequeno balanço dos punhos",
         "orientation": "Palmas para baixo, dedos apontando para o chão",
         "expression": "Tédio: olhar para cima, cabeça inclinada, boca relaxada"
@@ -19907,7 +20180,10 @@
         "signbank": 1093,
         "ines": "CHATEAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/entediar.svg",
+      "poster": "media/sinais/entediar-parado.svg",
+      "handshapeImage": "media/maos/entediar.svg"
     },
     {
       "id": "chave",
@@ -20235,7 +20511,11 @@
         "signbank": 665,
         "ines": "COÇAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/cocar.svg",
+      "poster": "media/sinais/cocar-parado.svg",
+      "handshapeImage": "media/maos/cocar.svg",
+      "regionalNote": "No dicionário do INES o sinal também coça a bochecha depois do antebraço."
     },
     {
       "id": "coco",
@@ -20516,7 +20796,10 @@
         "signbank": 815,
         "ines": "CURAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/curar.svg",
+      "poster": "media/sinais/curar-parado.svg",
+      "handshapeImage": "media/maos/curar.svg"
     },
     {
       "id": "cuspir",
@@ -20537,7 +20820,10 @@
         "signbank": 822,
         "ines": "CUSPIR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/cuspir.svg",
+      "poster": "media/sinais/cuspir-parado.svg",
+      "handshapeImage": "media/maos/cuspir.svg"
     },
     {
       "id": "cutucar",
@@ -20600,7 +20886,11 @@
         "signbank": 832,
         "ines": "DECEPCIONAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/decepcionar.svg",
+      "poster": "media/sinais/decepcionar-parado.svg",
+      "handshapeImage": "media/maos/decepcionar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: uma mão só que se fecha diante do pescoço e do peito."
     },
     {
       "id": "delicia",
@@ -20774,7 +21064,11 @@
         "signbank": 885,
         "ines": "DESPERTAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/despertar.svg",
+      "poster": "media/sinais/despertar-parado.svg",
+      "handshapeImage": "media/maos/despertar.svg",
+      "regionalNote": "No dicionário do INES o sinal é feito com as duas mãos, uma de cada lado do rosto."
     },
     {
       "id": "dez",
@@ -21036,7 +21330,10 @@
         "signbank": 1090,
         "ines": "ENROLAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/enrolar.svg",
+      "poster": "media/sinais/enrolar-parado.svg",
+      "handshapeImage": "media/maos/enrolar.svg"
     },
     {
       "id": "escrever-no-quadro",
@@ -21973,7 +22270,10 @@
         "signbank": 1472,
         "ines": "HOSPEDAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/hospedar.svg",
+      "poster": "media/sinais/hospedar-parado.svg",
+      "handshapeImage": "media/maos/hospedar.svg"
     },
     {
       "id": "identico",
@@ -22085,7 +22385,10 @@
         "signbank": 1570,
         "ines": "INVERTER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/inverter.svg",
+      "poster": "media/sinais/inverter-parado.svg",
+      "handshapeImage": "media/maos/inverter.svg"
     },
     {
       "id": "jabuticaba",
@@ -22908,7 +23211,10 @@
         "signbank": 1840,
         "ines": "MENDIGAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/mendigar.svg",
+      "poster": "media/sinais/mendigar-parado.svg",
+      "handshapeImage": "media/maos/mendigar.svg"
     },
     {
       "id": "menstruar",
@@ -24699,7 +25005,10 @@
         "signbank": 3260,
         "ines": "RECONHECER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/reconhecer.svg",
+      "poster": "media/sinais/reconhecer-parado.svg",
+      "handshapeImage": "media/maos/reconhecer.svg"
     },
     {
       "id": "refrigerante",
@@ -25100,10 +25409,13 @@
       },
       "hands": 2,
       "refs": {
-        "signbank": 2558,
-        "ines": "SATISFAZER"
+        "signbank": 2558
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/satisfeito.svg",
+      "poster": "media/sinais/satisfeito-parado.svg",
+      "handshapeImage": "media/maos/satisfeito.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma: a mão aberta passa sobre o peito."
     },
     {
       "id": "secador-de-cabelo",
@@ -25313,7 +25625,11 @@
         "signbank": 1033,
         "ines": "SUAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/suar.svg",
+      "poster": "media/sinais/suar-parado.svg",
+      "handshapeImage": "media/maos/suar.svg",
+      "regionalNote": "No dicionário do INES as duas mãos fechadas junto à cabeça descem abrindo os dedos, como gotas escorrendo."
     },
     {
       "id": "suco",
@@ -26228,7 +26544,10 @@
         "signbank": 3074,
         "ines": "ZERAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/zerar.svg",
+      "poster": "media/sinais/zerar-parado.svg",
+      "handshapeImage": "media/maos/zerar.svg"
     },
     {
       "id": "ziper",
