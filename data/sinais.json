@@ -4788,7 +4788,10 @@
         "signbank": 752,
         "ines": "CONVERSAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/conversar.svg",
+      "poster": "media/sinais/conversar-parado.svg",
+      "handshapeImage": "media/maos/conversar.svg"
     },
     {
       "id": "estar",
@@ -7447,7 +7450,11 @@
         "signbank": 412,
         "ines": "BRIGAR1"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/brigar.svg",
+      "poster": "media/sinais/brigar-parado.svg",
+      "handshapeImage": "media/maos/brigar.svg",
+      "regionalNote": "No dicionário do INES aparece uma forma com uma mão só, ao lado do rosto."
     },
     {
       "id": "feio",
@@ -10129,7 +10136,10 @@
         "signbank": 1244,
         "ines": "FINGIR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/fingir.svg",
+      "poster": "media/sinais/fingir-parado.svg",
+      "handshapeImage": "media/maos/fingir.svg"
     },
     {
       "id": "gratis",
@@ -10745,7 +10755,10 @@
         "signbank": 15,
         "ines": "ABRAÇAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/abracar.svg",
+      "poster": "media/sinais/abracar-parado.svg",
+      "handshapeImage": "media/maos/abracar.svg"
     },
     {
       "id": "bater",
@@ -14609,7 +14622,10 @@
         "signbank": 1074,
         "ines": "EMPRESTAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/emprestar.svg",
+      "poster": "media/sinais/emprestar-parado.svg",
+      "handshapeImage": "media/maos/emprestar.svg"
     },
     {
       "id": "enorme",
@@ -18621,7 +18637,11 @@
         "signbank": 977,
         "ines": "ALIVIAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/aliviar.svg",
+      "poster": "media/sinais/aliviar-parado.svg",
+      "handshapeImage": "media/maos/aliviar.svg",
+      "regionalNote": "No dicionário do INES aparece outra forma, com a mão na testa."
     },
     {
       "id": "amassar",
@@ -23793,7 +23813,10 @@
         "signbank": 1917,
         "ines": "MORDER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/morder.svg",
+      "poster": "media/sinais/morder-parado.svg",
+      "handshapeImage": "media/maos/morder.svg"
     },
     {
       "id": "moreno",
@@ -25065,7 +25088,11 @@
         "signbank": 2361,
         "ines": "PROMETER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/prometer.svg",
+      "poster": "media/sinais/prometer-parado.svg",
+      "handshapeImage": "media/maos/prometer.svg",
+      "regionalNote": "No dicionário do INES aparece só a mão erguida, sem a outra mão no peito."
     },
     {
       "id": "promocao",
@@ -26200,7 +26227,7 @@
       "how": "Mão aberta levantada na altura do ombro, palma para a frente. Ela desce em arco na direção do corpo, terminando com os dedos para baixo e a palma voltada para o corpo, como quem traz algo para perto.",
       "params": {
         "handshape": "Mão aberta, dedos unidos e esticados",
-        "location": "Começa ao lado do ombro dominante e termina em frente à cintura",
+        "location": "Começa ao lado do ombro dominante e termina em frente ao corpo, abaixo do peito.",
         "movement": "Arco para baixo e em direção ao corpo, uma vez",
         "orientation": "Começa com palma para a frente e termina com palma para o corpo, dedos para baixo",
         "expression": "Neutra"
@@ -26210,7 +26237,11 @@
         "signbank": 2849,
         "ines": "TRAZER"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/trazer.svg",
+      "poster": "media/sinais/trazer-parado.svg",
+      "handshapeImage": "media/maos/trazer.svg",
+      "regionalNote": "No dicionário do INES a mão aberta vem do lado em direção ao peito."
     },
     {
       "id": "trem",
@@ -26674,7 +26705,10 @@
         "signbank": 3043,
         "ines": "VOMITAR"
       },
-      "class": "verbo"
+      "class": "verbo",
+      "image": "media/sinais/vomitar.svg",
+      "poster": "media/sinais/vomitar-parado.svg",
+      "handshapeImage": "media/maos/vomitar.svg"
     },
     {
       "id": "vulcao",
